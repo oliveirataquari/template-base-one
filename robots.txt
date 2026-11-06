@@ -1,0 +1,5 @@
+# robots.txt | trocar o domínio em cada projeto
+User-agent: *
+Allow: /
+
+Sitemap: https://www.seudominio.com.br/sitemap.xml

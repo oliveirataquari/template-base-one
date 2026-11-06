@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <!-- ===================================================================
+       BaseOne | Template multi-negócio em Bootstrap 5
+       Autor: Tiago Oliveira
+       =================================================================== -->
+
+  <!-- ===== Codificação e responsividade ===== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===== SEO básico (TROCAR em cada projeto) ===== -->
+  <title>BaseOne | Generic Template</title>
+  <meta name="description" content="Descrição da empresa em até 155 caracteres, com a palavra-chave principal.">
+  <meta name="keywords" content="palavra-chave 1, palavra-chave 2, palavra-chave 3">
+  <meta name="author" content="Nome da Empresa">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.seudominio.com.br/">
+  <meta name="theme-color" content="#2f6fed">
+
+  <!-- ===== Open Graph (pré-visualização no WhatsApp, Facebook, LinkedIn) ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Nome da Empresa">
+  <meta property="og:title" content="Nome da Empresa | Slogan ou serviço principal">
+  <meta property="og:description" content="Descrição curta da empresa.">
+  <meta property="og:url" content="https://www.seudominio.com.br/">
+  <meta property="og:image" content="https://www.seudominio.com.br/assets/img/og-image.jpg">
+  <!-- sugestão: 1200x630 px -->
+
+  <!-- ===== Twitter / X Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nome da Empresa | Slogan ou serviço principal">
+  <meta name="twitter:description" content="Descrição curta da empresa.">
+  <meta name="twitter:image" content="https://www.seudominio.com.br/assets/img/og-image.jpg">
+
+  <!-- ===== Favicon ===== -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <!-- <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png"> -->
+
+  <!-- ===== Dados estruturados (JSON-LD) para o Google ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Nome da Empresa",
+    "url": "https://www.seudominio.com.br/",
+    "logo": "https://www.seudominio.com.br/assets/img/logo.png",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- ===== Fontes do Google (Poppins = títulos | Open Sans = textos) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ===== CSS de terceiros via CDN ===== -->
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Font Awesome (usar principalmente para ícones de marcas: WhatsApp, Instagram etc.) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+  <!-- ===== Bibliotecas OPCIONAIS: descomente só o que o projeto usar ===== -->
+  <!-- AOS (animações ao rolar) -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"> -->
+  <!-- Swiper (carrosséis) -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"> -->
+  <!-- GLightbox (galeria / modal) -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css" rel="stylesheet"> -->
+  <!-- (Isotope não tem CSS: só JS, veja o final da página) -->
+
+  <!-- ===== CSS principal do template (sempre por último para sobrescrever o resto) ===== -->
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<!-- data-bs-spy: destaca no menu a seção que está visível (Scrollspy do Bootstrap) -->
+
+<body data-bs-spy="scroll" data-bs-target="#navmenu" data-bs-root-margin="-80px 0px -60% 0px"
+  data-bs-smooth-scroll="true" tabindex="0">
+
+  <!-- Link de acessibilidade: permite pular o menu usando o teclado -->
+  <a class="visually-hidden-focusable skip-link" href="#main">Ir para o conteúdo</a>
+
+  <!-- =====================================================================
+       CABEÇALHO (fixo no topo)
+       Desktop: [Logo] ........ [Menu centralizado] ........ [Botão]
+       Mobile : [Logo] ................... [Botão] [Hambúrguer]
+       ===================================================================== -->
+  <header id="header" class="header">
+    <div class="container header-inner">
+
+      <!-- 1) LOGO (esquerda) | para usar imagem: <img src="assets/img/logo.png" alt="Nome da Empresa" height="36"> -->
+      <a href="index.html" class="logo" aria-label="Nome da Empresa - página inicial">
+        <i class="bi bi-layers-fill" aria-hidden="true"></i>
+        <span>BASE</span>
+      </a>
+
+      <!-- 2) MENU DE NAVEGAÇÃO (centro no desktop | painel que abre abaixo do header no mobile) -->
+      <nav id="navmenu" class="navmenu collapse" aria-label="Menu principal">
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link" href="#hero">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#servicos">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfólio</a></li>
+        </ul>
+      </nav>
+
+      <!-- 3) AÇÕES (direita): botão de contato + hambúrguer (este só aparece no mobile) -->
+      <div class="header-actions">
+        <a class="btn btn-cta" href="#contato">Fale conosco</a>
+
+        <button class="header-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"
+          aria-controls="navmenu" aria-expanded="false" aria-label="Abrir ou fechar o menu">
+          <i class="bi bi-list" aria-hidden="true"></i>
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+  <!-- ===== Fim do cabeçalho ===== -->
+
+
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL
+       As seções entram aqui, uma por vez (hero, sobre, serviços...).
+  ===================================================================== -->
+  <main id="main">
+
+
+    <!-- =====================================================================
+         HERO (primeira seção da página)
+    ===================================================================== -->
+    <section id="hero" class="hero">
+      <div class="container">
+        <div class="row align-items-center gy-5">
+
+          <!-- Coluna de texto -->
+          <div class="col-lg-6">
+            <!-- Use só UM <h1> por página (importante para SEO) -->
+            <h1 class="hero-title">Título principal com a proposta de valor</h1>
+            <p class="hero-text">
+              Texto curto de apoio, com duas ou três linhas explicando o que a empresa faz e para quem.
+            </p>
+
+            <!-- Botões: o principal (cheio) e o secundário (contorno) -->
+            <div class="hero-actions">
+              <a href="#servicos" class="btn btn-cta">Conheça nossos serviços</a>
+              <a href="#portfolio" class="btn btn-cta-outline">Ver portfólio</a>
+            </div>
+          </div>
+
+          <!-- Coluna da imagem -->
+          <div class="col-lg-6">
+            <div class="hero-visual">
+              <!-- Para usar foto, troque o <i> por:
+                   <img src="assets/img/hero.jpg" alt="Descrição da imagem" width="800" height="600"> -->
+              <i class="bi bi-image" aria-hidden="true"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- =====================================================================
+         SOBRE NÓS
+    ===================================================================== -->
+    <section id="sobre" class="secao secao-fundo">
+      <div class="container">
+        <div class="row align-items-center gy-5">
+
+          <!-- Coluna da imagem -->
+          <div class="col-lg-6">
+            <div class="sobre-visual">
+              <!-- Para usar foto, troque o <i> por:
+                   <img src="assets/img/sobre.jpg" alt="Descrição da imagem" width="800" height="600" loading="lazy"> -->
+              <i class="bi bi-image" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <!-- Coluna de texto -->
+          <div class="col-lg-6">
+            <span class="secao-rotulo">Sobre nós</span>
+            <h2 class="secao-titulo">Uma frase curta que resume quem somos</h2>
+            <p class="sobre-texto">
+              Parágrafo de apresentação da empresa: há quanto tempo atua, o que faz e o que a diferencia.
+              Duas ou três linhas bastam.
+            </p>
+
+            <!-- Lista de destaques (copie e cole um <li> para adicionar mais itens) -->
+            <ul class="sobre-lista">
+              <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i><span>Primeiro diferencial da empresa</span>
+              </li>
+              <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i><span>Segundo diferencial da empresa</span>
+              </li>
+              <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i><span>Terceiro diferencial da empresa</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+    <!-- =====================================================================
+         SERVIÇOS | layout "servicos-cards" (grade de cards com ícone)
+         Desktop: 3 colunas | Tablet: 2 colunas | Mobile: 1 coluna
+         O id="servicos" é usado pelo menu; a classe define o layout.
+         ===================================================================== -->
+    <section id="servicos" class="secao servicos-cards">
+      <div class="container">
+
+        <!-- Cabeçalho da seção (padrão reutilizável) -->
+        <div class="secao-cabecalho">
+          <span class="secao-rotulo">Serviços</span>
+          <h2 class="secao-titulo">O que fazemos por você</h2>
+          <p class="secao-subtitulo">Frase curta que apresenta os serviços da empresa.</p>
+        </div>
+
+        <!-- Grade de cards (para adicionar um serviço, copie e cole um bloco <div class="col-md-6 col-lg-4">) -->
+        <div class="row g-4">
+
+          <div class="col-md-6 col-lg-4">
+            <div class="servicos-card">
+              <!-- Ícones: https://icons.getbootstrap.com (trocar só o nome "bi-briefcase") -->
+              <div class="servicos-card-icone"><i class="bi bi-briefcase" aria-hidden="true"></i></div>
+              <h3 class="servicos-card-titulo">Serviço um</h3>
+              <p class="servicos-card-texto">Descrição curta do serviço, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="servicos-card">
+              <div class="servicos-card-icone"><i class="bi bi-graph-up-arrow" aria-hidden="true"></i></div>
+              <h3 class="servicos-card-titulo">Serviço dois</h3>
+              <p class="servicos-card-texto">Descrição curta do serviço, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="servicos-card">
+              <div class="servicos-card-icone"><i class="bi bi-people" aria-hidden="true"></i></div>
+              <h3 class="servicos-card-titulo">Serviço três</h3>
+              <p class="servicos-card-texto">Descrição curta do serviço, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="servicos-card">
+              <div class="servicos-card-icone"><i class="bi bi-shield-check" aria-hidden="true"></i></div>
+              <h3 class="servicos-card-titulo">Serviço quatro</h3>
+              <p class="servicos-card-texto">Descrição curta do serviço, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="servicos-card">
+              <div class="servicos-card-icone"><i class="bi bi-headset" aria-hidden="true"></i></div>
+              <h3 class="servicos-card-titulo">Serviço cinco</h3>
+              <p class="servicos-card-texto">Descrição curta do serviço, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="servicos-card">
+              <div class="servicos-card-icone"><i class="bi bi-lightning-charge" aria-hidden="true"></i></div>
+              <h3 class="servicos-card-titulo">Serviço seis</h3>
+              <p class="servicos-card-texto">Descrição curta do serviço, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+        <!-- =====================================================================
+         PORTFÓLIO | layout "portfolio-isotope" (filtros + grade de cards)
+         Desktop: 3 colunas | Tablet: 2 colunas | Mobile: 1 coluna
+         Como funciona o filtro: cada botão tem data-filter=".filter-xxx" e
+         cada card tem a classe "filter-xxx". O botão "Todos" usa data-filter="*".
+         ===================================================================== -->
+    <section id="portfolio" class="secao portfolio-isotope">
+      <div class="container">
+
+        <!-- Cabeçalho da seção (padrão reutilizável) -->
+        <div class="secao-cabecalho">
+          <span class="secao-rotulo">Portfólio</span>
+          <h2 class="secao-titulo">Nossos trabalhos</h2>
+          <p class="secao-subtitulo">Frase curta que apresenta os projetos realizados.</p>
+        </div>
+
+        <!-- Botões de filtro (para criar uma categoria nova: copie um botão e mude o data-filter) -->
+        <div class="portfolio-filtros" role="group" aria-label="Filtrar projetos por categoria">
+          <button type="button" class="portfolio-filtro ativo" data-filter="*" aria-pressed="true">Todos</button>
+          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-1" aria-pressed="false">Categoria 1</button>
+          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-2" aria-pressed="false">Categoria 2</button>
+          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-3" aria-pressed="false">Categoria 3</button>
+        </div>
+
+        <!-- Grade de cards (o Isotope organiza os itens .portfolio-item dentro desta .row) -->
+        <div class="row gy-4 portfolio-grade">
+
+          <div class="col-md-6 col-lg-4 portfolio-item filter-categoria-1">
+            <article class="portfolio-card">
+              <!-- Para usar foto, troque o <i> por:
+                   <img src="assets/img/portfolio/projeto-1.jpg" alt="Descrição" width="600" height="450" loading="lazy"> -->
+              <div class="portfolio-card-imagem"><i class="bi bi-image" aria-hidden="true"></i></div>
+              <div class="portfolio-card-corpo">
+                <span class="portfolio-card-categoria">Categoria 1</span>
+                <h3 class="portfolio-card-titulo">Projeto um</h3>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 portfolio-item filter-categoria-2">
+            <article class="portfolio-card">
+              <div class="portfolio-card-imagem"><i class="bi bi-image" aria-hidden="true"></i></div>
+              <div class="portfolio-card-corpo">
+                <span class="portfolio-card-categoria">Categoria 2</span>
+                <h3 class="portfolio-card-titulo">Projeto dois</h3>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 portfolio-item filter-categoria-3">
+            <article class="portfolio-card">
+              <div class="portfolio-card-imagem"><i class="bi bi-image" aria-hidden="true"></i></div>
+              <div class="portfolio-card-corpo">
+                <span class="portfolio-card-categoria">Categoria 3</span>
+                <h3 class="portfolio-card-titulo">Projeto três</h3>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 portfolio-item filter-categoria-1">
+            <article class="portfolio-card">
+              <div class="portfolio-card-imagem"><i class="bi bi-image" aria-hidden="true"></i></div>
+              <div class="portfolio-card-corpo">
+                <span class="portfolio-card-categoria">Categoria 1</span>
+                <h3 class="portfolio-card-titulo">Projeto quatro</h3>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 portfolio-item filter-categoria-2">
+            <article class="portfolio-card">
+              <div class="portfolio-card-imagem"><i class="bi bi-image" aria-hidden="true"></i></div>
+              <div class="portfolio-card-corpo">
+                <span class="portfolio-card-categoria">Categoria 2</span>
+                <h3 class="portfolio-card-titulo">Projeto cinco</h3>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 portfolio-item filter-categoria-3">
+            <article class="portfolio-card">
+              <div class="portfolio-card-imagem"><i class="bi bi-image" aria-hidden="true"></i></div>
+              <div class="portfolio-card-corpo">
+                <span class="portfolio-card-categoria">Categoria 3</span>
+                <h3 class="portfolio-card-titulo">Projeto seis</h3>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+  </main>
+
+
+  <!-- =====================================================================
+       BOTÃO "VOLTAR AO TOPO"
+       ===================================================================== -->
+  <button id="voltarTopo" class="voltar-topo" type="button" aria-label="Voltar ao topo">
+    <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
+  </button>
+
+
+  <!-- ===== JS de terceiros via CDN (Bootstrap bundle já inclui o Popper) ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===== Bibliotecas OPCIONAIS: descomente só o que o projeto usar ===== -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script> -->
+  <!-- Isotope precisa do imagesLoaded para calcular o layout depois que as imagens carregam -->
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+
+  <!-- ===== JS principal do template ===== -->
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

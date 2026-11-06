@@ -1,0 +1,684 @@
+/* =========================================================================
+   BASE | main.css
+   Índice:
+   1. Variáveis (cores, fontes, medidas)  -> EDITE AQUI para personalizar
+   2. Estilos globais
+    2.1 Padrão das seções (sections)
+   3. Cabeçalho (header, logo, menu, botão, hambúrguer)
+   4. Bloco temporário de teste (apagar depois)
+   5. Hero
+   6. Botão voltar ao topo
+   ========================================================================= */
+
+
+/* =========================================================================
+   1. VARIÁVEIS
+   ========================================================================= */
+:root {
+  /* Fontes */
+  --font-body: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "Poppins", system-ui, sans-serif;
+
+  /* Cores do template */
+  --color-primary: #2f6fed;
+  /* cor principal (botões, links, destaque) */
+  --color-primary-dark: #1f55c4;
+  /* cor principal no hover */
+  --color-text: #1f2937;
+  /* texto padrão */
+  --color-muted: #6b7280;
+  /* texto secundário */
+  --color-bg: #ffffff;
+  /* fundo da página */
+  --color-border: #e5e7eb;
+  /* linhas e bordas suaves */
+
+  /* Medidas */
+  --header-h: 72px;
+  /* altura do cabeçalho fixo */
+
+  /* Faz o Bootstrap usar a nossa cor principal (botões, links, utilitários) */
+  --bs-primary: #2f6fed;
+  --bs-primary-rgb: 47, 111, 237;
+  --bs-link-color: var(--color-primary);
+  --bs-link-hover-color: var(--color-primary-dark);
+}
+
+
+/* =========================================================================
+   2. ESTILOS GLOBAIS
+   ========================================================================= */
+html {
+  /* Quando clicar num link de âncora, a seção para abaixo do header fixo */
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  padding-top: var(--header-h);
+  /* evita que o header fixo cubra o início da página */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* Link "pular para o conteúdo" (só aparece ao navegar com o teclado) */
+.skip-link {
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  z-index: 2000;
+  padding: .5rem 1rem;
+  background: var(--color-bg);
+  border-radius: .375rem;
+}
+
+
+/* =========================================================================
+   2.1 PADRÃO DAS SEÇÕES
+   ========================================================================= */
+
+/* Espaçamento vertical da seção */
+.secao {
+  padding: 5rem 0;
+}
+/* Rótulo pequeno acima do título (ex.: "SOBRE NÓS") */
+.secao-rotulo {
+  display: inline-block;
+  margin-bottom: .5rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: .85rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+/* Título da seção (tamanho se ajusta à largura da tela) */
+.secao-titulo {
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+/* Variação: fundo azul claro (use junto com .secao para alternar o ritmo da página) */
+.secao-fundo {
+  background: rgba(var(--bs-primary-rgb), .08);
+}
+
+
+
+/* =========================================================================
+   3. CABEÇALHO
+   ========================================================================= */
+
+/* ----- Barra fixa ----- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  z-index: 1030;
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s, box-shadow .25s;
+}
+
+/* Fundo translúcido com desfoque (fica num pseudo-elemento para não afetar o menu mobile) */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 255, 255, .92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* Classe aplicada pelo main.js quando a página é rolada */
+.header.scrolled {
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 2px 12px rgba(17, 24, 39, .06);
+}
+
+/* Linha interna (mobile): logo | ... | botão + hambúrguer */
+.header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ----- Logo ----- */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.logo i {
+  color: var(--color-primary);
+}
+
+.logo img {
+  display: block;
+  max-height: 36px;
+  width: auto;
+}
+
+/* ----- Ações à direita (botão + hambúrguer) ----- */
+.header-actions {
+  margin-left: auto;
+  /* empurra para o fim da linha */
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* Botão de contato */
+.btn-cta {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--color-primary-dark);
+  --bs-btn-hover-border-color: var(--color-primary-dark);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--color-primary-dark);
+  --bs-btn-active-border-color: var(--color-primary-dark);
+  --bs-btn-focus-shadow-rgb: 47, 111, 237;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: .9rem;
+  padding: .5rem 1.1rem;
+  border-radius: 50rem;
+  /* formato "pílula" */
+  white-space: nowrap;
+}
+
+/* Botão hambúrguer (troca o ícone ☰ por ✕ conforme o menu abre/fecha) */
+.header-toggler {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  font-size: 1.6rem;
+  color: var(--color-text);
+  background: none;
+  border: 0;
+  border-radius: .375rem;
+}
+
+.header-toggler:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.header-toggler .bi-x-lg {
+  display: none;
+  font-size: 1.3rem;
+}
+
+.header-toggler[aria-expanded="true"] .bi-list {
+  display: none;
+}
+
+.header-toggler[aria-expanded="true"] .bi-x-lg {
+  display: inline;
+}
+
+/* ----- Menu: versão MOBILE (painel logo abaixo do header) ----- */
+.navmenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: .5rem 0 1rem;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 8px 16px rgba(17, 24, 39, .08);
+}
+
+.navmenu .nav {
+  flex-direction: column;
+  padding: 0 1.5rem;
+}
+
+/* Links do menu */
+.navmenu .nav-link {
+  position: relative;
+  padding: .65rem 1rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: .95rem;
+  color: var(--color-text);
+  transition: color .2s;
+}
+
+.navmenu .nav-link:hover,
+.navmenu .nav-link:focus-visible {
+  color: var(--color-primary);
+}
+
+.navmenu .nav-link.active {
+  color: var(--color-primary);
+}
+
+/* ----- Menu + header: versão DESKTOP (a partir de 992px) ----- */
+@media (min-width: 992px) {
+
+  /* Grade de 3 colunas: o menu fica no centro REAL, independente da largura de logo e botão */
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .header-actions {
+    justify-self: end;
+    margin-left: 0;
+  }
+
+  /* Esconde o hambúrguer */
+  .header-toggler {
+    display: none;
+  }
+
+  /* Menu sempre visível, em linha, sem aparência de painel */
+  .navmenu {
+    display: block !important;
+    /* sobrepõe o .collapse do Bootstrap */
+    position: static;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .navmenu .nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  /* Sublinhado do item ativo */
+  .navmenu .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: .3rem;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transition: transform .2s;
+  }
+
+  .navmenu .nav-link.active::after,
+  .navmenu .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+
+/* =========================================================================
+   4. BLOCO TEMPORÁRIO DE TESTE (apagar junto com os <section class="secao-teste">)
+   ========================================================================= */
+.secao-teste {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  color: var(--color-muted);
+  border-bottom: 1px dashed var(--color-border);
+}
+
+
+/* =========================================================================
+   5. HERO
+   ========================================================================= */
+
+/* Ocupa a altura da tela menos o header fixo, com o conteúdo centralizado */
+.hero {
+  min-height: calc(100vh - var(--header-h));
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+/* Título: o tamanho se ajusta à largura da tela (mínimo 2rem, máximo 3.5rem) */
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+/* Texto de apoio (limitado em largura para leitura confortável) */
+.hero-text {
+  max-width: 34rem;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+}
+
+/* Linha dos botões (quebra para a linha de baixo se faltar espaço) */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+/* Botões do hero um pouco maiores que o botão do header */
+.hero .btn {
+  padding: .75rem 1.6rem;
+  font-size: 1rem;
+}
+
+/* Botão secundário (contorno), mesmo estilo do .btn-cta */
+.btn-cta-outline {
+  --bs-btn-color: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--color-primary);
+  --bs-btn-hover-border-color: var(--color-primary);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--color-primary-dark);
+  --bs-btn-active-border-color: var(--color-primary-dark);
+  --bs-btn-focus-shadow-rgb: 47, 111, 237;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  border-radius: 50rem;
+  white-space: nowrap;
+}
+
+/* Bloco da imagem (proporção 4:3). Sem foto, mostra o ícone de placeholder */
+.hero-visual {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: rgba(var(--bs-primary-rgb), .08);
+  color: var(--color-primary);
+  font-size: 4rem;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+
+
+/* =========================================================================
+   6. BOTÃO VOLTAR AO TOPO
+   ========================================================================= */
+.voltar-topo {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1020;
+  /* abaixo do header (1030) */
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 1.9rem;
+  color: #fff;
+  background: var(--color-primary);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(17, 24, 39, .15);
+
+  /* Estado inicial: escondido */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(.75rem);
+  transition: opacity .25s, visibility .25s, transform .25s, background-color .2s;
+}
+
+/* Classe aplicada pelo main.js depois de rolar a página */
+.voltar-topo.visivel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.voltar-topo:hover {
+  background: var(--color-primary-dark);
+}
+
+.voltar-topo:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================================
+   7. SOBRE NÓS
+   ========================================================================= */
+
+/* Bloco da imagem (proporção 4:3). Sem foto, mostra o ícone de placeholder */
+.sobre-visual {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: rgba(var(--bs-primary-rgb), .08);
+  color: var(--color-primary);
+  font-size: 4rem;
+}
+/*
+.sobre-visual {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: #fff;
+  color: var(--color-primary);
+  font-size: 4rem;
+}
+*/
+
+.sobre-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* Texto de apresentação */
+.sobre-texto {
+  margin-bottom: 1.5rem;
+  color: var(--color-muted);
+}
+
+/* Lista de destaques com ícone de check */
+.sobre-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .75rem;
+}
+
+.sobre-lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+}
+
+.sobre-lista i {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--color-primary);
+}
+
+
+/* =========================================================================
+   8. SERVIÇOS | layout "servicos-cards"
+   ========================================================================= */
+
+/* ----- Cabeçalho de seção centralizado (padrão reutilizável nas próximas seções) ----- */
+.secao-cabecalho {
+  max-width: 40rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+.secao-subtitulo {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* ----- Card ----- */
+.servicos-card {
+  height: 100%;                    /* todos os cards da mesma linha ficam com a mesma altura */
+  padding: 2rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.servicos-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, .08);
+}
+
+/* Ícone dentro de um círculo azul claro */
+.servicos-card-icone {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(var(--bs-primary-rgb), .08);
+  color: var(--color-primary);
+  font-size: 1.6rem;
+}
+
+/* Título e texto do card */
+.servicos-card-titulo {
+  margin-bottom: .5rem;
+  font-size: 1.15rem;
+}
+.servicos-card-texto {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+
+
+
+
+/* =========================================================================
+   9. PORTFÓLIO | layout "portfolio-isotope"
+   ========================================================================= */
+
+/* ----- Botões de filtro ----- */
+.portfolio-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+  margin-bottom: 2.5rem;
+}
+.portfolio-filtro {
+  padding: .45rem 1.2rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: .9rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 50rem;            /* formato "pílula", igual aos outros botões */
+  transition: color .2s, background-color .2s, border-color .2s;
+}
+.portfolio-filtro:hover { color: var(--color-primary); border-color: var(--color-primary); }
+.portfolio-filtro:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+/* Filtro selecionado (a classe .ativo é trocada pelo main.js) */
+.portfolio-filtro.ativo {
+  color: #fff;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ----- Card ----- */
+.portfolio-card {
+  overflow: hidden;                /* mantém a imagem dentro das bordas arredondadas */
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.portfolio-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, .08);
+}
+
+/* Área da imagem (proporção 4:3). Sem foto, mostra o ícone de placeholder */
+.portfolio-card-imagem {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--bs-primary-rgb), .08);
+  color: var(--color-primary);
+  font-size: 3rem;
+}
+.portfolio-card-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Texto abaixo da imagem */
+.portfolio-card-corpo { padding: 1.25rem 1.5rem 1.5rem; }
+.portfolio-card-categoria {
+  display: block;
+  margin-bottom: .25rem;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.portfolio-card-titulo {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+
+
+
+
+/* =========================================================================
+   8. Tiago | CSS personalizado
+   ========================================================================= */
+
+   .hide {
+    display: none !important;
+   }
