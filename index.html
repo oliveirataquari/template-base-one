@@ -4,6 +4,7 @@
 <head>
   <!-- ===================================================================
        BaseOne | Template multi-negócio em Bootstrap 5
+       Versão: 1.0 (06/11/2026)
        Autor: Tiago Oliveira
        =================================================================== -->
 
@@ -71,9 +72,9 @@
   <!-- AOS (animações ao rolar) -->
   <!-- <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"> -->
   <!-- Swiper (carrosséis) -->
-  <!-- <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"> -->
+  <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
   <!-- GLightbox (galeria / modal) -->
-  <!-- <link href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css" rel="stylesheet"> -->
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css" rel="stylesheet">
   <!-- (Isotope não tem CSS: só JS, veja o final da página) -->
 
   <!-- ===== CSS principal do template (sempre por último para sobrescrever o resto) ===== -->
@@ -109,6 +110,7 @@
           <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
           <li class="nav-item"><a class="nav-link" href="#servicos">Serviços</a></li>
           <li class="nav-item"><a class="nav-link" href="#portfolio">Portfólio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
         </ul>
       </nav>
 
@@ -291,7 +293,7 @@
 
 
 
-        <!-- =====================================================================
+    <!-- =====================================================================
          PORTFÓLIO | layout "portfolio-isotope" (filtros + grade de cards)
          Desktop: 3 colunas | Tablet: 2 colunas | Mobile: 1 coluna
          Como funciona o filtro: cada botão tem data-filter=".filter-xxx" e
@@ -310,9 +312,12 @@
         <!-- Botões de filtro (para criar uma categoria nova: copie um botão e mude o data-filter) -->
         <div class="portfolio-filtros" role="group" aria-label="Filtrar projetos por categoria">
           <button type="button" class="portfolio-filtro ativo" data-filter="*" aria-pressed="true">Todos</button>
-          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-1" aria-pressed="false">Categoria 1</button>
-          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-2" aria-pressed="false">Categoria 2</button>
-          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-3" aria-pressed="false">Categoria 3</button>
+          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-1"
+            aria-pressed="false">Categoria 1</button>
+          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-2"
+            aria-pressed="false">Categoria 2</button>
+          <button type="button" class="portfolio-filtro" data-filter=".filter-categoria-3"
+            aria-pressed="false">Categoria 3</button>
         </div>
 
         <!-- Grade de cards (o Isotope organiza os itens .portfolio-item dentro desta .row) -->
@@ -387,6 +392,446 @@
 
 
 
+
+
+    <!-- =====================================================================
+         FAQ | layout "faq-accordion" (perguntas frequentes)
+         Só uma resposta fica aberta por vez: isso vem do data-bs-parent="#faqLista",
+         que aponta para o id da lista abaixo. Cada pergunta tem um botão
+         (data-bs-target) ligado a uma resposta (id igual ao do target).
+         ===================================================================== -->
+    <section id="faq" class="secao faq-accordion">
+      <div class="container">
+
+        <!-- Cabeçalho da seção (padrão reutilizável) -->
+        <div class="secao-cabecalho">
+          <span class="secao-rotulo">FAQ</span>
+          <h2 class="secao-titulo">Perguntas frequentes</h2>
+          <p class="secao-subtitulo">Frase curta que convida o visitante a tirar suas dúvidas.</p>
+        </div>
+
+        <!-- Lista de perguntas (para adicionar uma, copie um bloco <div class="faq-item"> e troque os ids faq-1 por faq-7, etc.) -->
+        <div class="faq-lista" id="faqLista">
+
+          <!-- Item 1: aberto por padrão (para começar fechado, tire o "show" da resposta,
+               tire "collapsed" do botão e deixe aria-expanded="false") -->
+          <div class="faq-item">
+            <h3 class="faq-titulo">
+              <button class="faq-pergunta" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1"
+                aria-expanded="true" aria-controls="faq-1">
+                <span>Primeira pergunta frequente?</span>
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+              </button>
+            </h3>
+            <div id="faq-1" class="collapse show" data-bs-parent="#faqLista">
+              <p class="faq-resposta">Resposta clara e direta, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="faq-item">
+            <h3 class="faq-titulo">
+              <button class="faq-pergunta collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2"
+                aria-expanded="false" aria-controls="faq-2">
+                <span>Segunda pergunta frequente?</span>
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+              </button>
+            </h3>
+            <div id="faq-2" class="collapse" data-bs-parent="#faqLista">
+              <p class="faq-resposta">Resposta clara e direta, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="faq-item">
+            <h3 class="faq-titulo">
+              <button class="faq-pergunta collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3"
+                aria-expanded="false" aria-controls="faq-3">
+                <span>Terceira pergunta frequente?</span>
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+              </button>
+            </h3>
+            <div id="faq-3" class="collapse" data-bs-parent="#faqLista">
+              <p class="faq-resposta">Resposta clara e direta, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="faq-item">
+            <h3 class="faq-titulo">
+              <button class="faq-pergunta collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-4"
+                aria-expanded="false" aria-controls="faq-4">
+                <span>Quarta pergunta frequente?</span>
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+              </button>
+            </h3>
+            <div id="faq-4" class="collapse" data-bs-parent="#faqLista">
+              <p class="faq-resposta">Resposta clara e direta, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="faq-item">
+            <h3 class="faq-titulo">
+              <button class="faq-pergunta collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-5"
+                aria-expanded="false" aria-controls="faq-5">
+                <span>Quinta pergunta frequente?</span>
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+              </button>
+            </h3>
+            <div id="faq-5" class="collapse" data-bs-parent="#faqLista">
+              <p class="faq-resposta">Resposta clara e direta, em duas ou três linhas.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <!-- =====================================================================
+         DEPOIMENTOS | layout "depoimentos-carrossel" (Swiper)
+         Desktop: 3 cards | Tablet: 2 cards | Mobile: 1 card
+         Anda sozinho e tem pontinhos de navegação (configurados no main.js).
+         Para adicionar um depoimento, copie um bloco <div class="swiper-slide">.
+         Mantenha pelo menos 6 depoimentos, para o giro contínuo funcionar bem.
+         ===================================================================== -->
+    <section id="depoimentos" class="secao secao-fundo depoimentos-carrossel">
+      <div class="container">
+
+        <!-- Cabeçalho da seção (padrão reutilizável) -->
+        <div class="secao-cabecalho">
+          <span class="secao-rotulo">Depoimentos</span>
+          <h2 class="secao-titulo">O que dizem sobre nós</h2>
+          <p class="secao-subtitulo">Frase curta que apresenta a opinião de quem já foi atendido.</p>
+        </div>
+
+        <!-- Carrossel: a classe "swiper" é do Swiper; "depoimentos-swiper" é nossa -->
+        <div class="swiper depoimentos-swiper">
+          <div class="swiper-wrapper">
+
+            <!-- Depoimento 1 -->
+            <div class="swiper-slide">
+              <article class="depoimentos-card">
+                <h3 class="depoimentos-nome"><i class="bi bi-person-circle" aria-hidden="true"></i> Nome do cliente 1
+                </h3>
+                <!-- Estrelas apenas ilustrativas (sem função) -->
+                <div class="depoimentos-estrelas" role="img" aria-label="5 de 5 estrelas">
+                  <i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i>
+                </div>
+                <p class="depoimentos-texto">Opinião do cliente sobre o atendimento, em duas ou três linhas.</p>
+              </article>
+            </div>
+
+            <!-- Depoimento 2 -->
+            <div class="swiper-slide">
+              <article class="depoimentos-card">
+                <h3 class="depoimentos-nome"><i class="bi bi-person-circle" aria-hidden="true"></i> Nome do cliente 2
+                </h3>
+                <div class="depoimentos-estrelas" role="img" aria-label="5 de 5 estrelas">
+                  <i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i>
+                </div>
+                <p class="depoimentos-texto">Opinião do cliente sobre o atendimento, em duas ou três linhas.</p>
+              </article>
+            </div>
+
+            <!-- Depoimento 3 -->
+            <div class="swiper-slide">
+              <article class="depoimentos-card">
+                <h3 class="depoimentos-nome"><i class="bi bi-person-circle" aria-hidden="true"></i> Nome do cliente 3
+                </h3>
+                <div class="depoimentos-estrelas" role="img" aria-label="5 de 5 estrelas">
+                  <i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i>
+                </div>
+                <p class="depoimentos-texto">Opinião do cliente sobre o atendimento, em duas ou três linhas.</p>
+              </article>
+            </div>
+
+            <!-- Depoimento 4 -->
+            <div class="swiper-slide">
+              <article class="depoimentos-card">
+                <h3 class="depoimentos-nome"><i class="bi bi-person-circle" aria-hidden="true"></i> Nome do cliente 4
+                </h3>
+                <div class="depoimentos-estrelas" role="img" aria-label="5 de 5 estrelas">
+                  <i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i>
+                </div>
+                <p class="depoimentos-texto">Opinião do cliente sobre o atendimento, em duas ou três linhas.</p>
+              </article>
+            </div>
+
+
+            <!-- Depoimento 5 -->
+            <div class="swiper-slide">
+              <article class="depoimentos-card">
+                <h3 class="depoimentos-nome"><i class="bi bi-person-circle" aria-hidden="true"></i> Nome do cliente 5
+                </h3>
+                <div class="depoimentos-estrelas" role="img" aria-label="5 de 5 estrelas">
+                  <i class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i><i class="bi bi-star-fill" aria-hidden="true"></i><i
+                    class="bi bi-star-fill" aria-hidden="true"></i>
+                </div>
+                <p class="depoimentos-texto">Opinião do cliente sobre o atendimento, em duas ou três linhas.</p>
+              </article>
+            </div>
+
+          </div>
+
+          <!-- Pontinhos de navegação (o Swiper preenche esta div) -->
+          <div class="swiper-pagination depoimentos-pontos"></div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+    <!-- =====================================================================
+         GALERIA | layout "galeria-carrossel" (Swiper + GLightbox)
+         Desktop: 3 fotos | Tablet: 2 fotos | Mobile: 1 foto
+         Clique na foto: abre ampliada no lightbox (GLightbox).
+         Setas: botões abaixo do carrossel, no canto direito (fora do .swiper).
+         Para adicionar uma foto, copie um bloco <div class="swiper-slide">.
+         Em cada foto: href = imagem grande (lightbox) | src = imagem pequena (miniatura).
+         As imagens abaixo são só de exemplo (picsum.photos): troque pelas suas,
+         ex.: href="assets/img/galeria/foto-1-grande.jpg" src="assets/img/galeria/foto-1.jpg"
+         ===================================================================== -->
+    <section id="galeria" class="secao galeria-carrossel">
+      <div class="container">
+
+        <!-- Cabeçalho da seção (padrão reutilizável) -->
+        <div class="secao-cabecalho">
+          <span class="secao-rotulo">Galeria</span>
+          <h2 class="secao-titulo">Conheça nosso espaço</h2>
+          <p class="secao-subtitulo">Frase curta que apresenta as imagens da galeria.</p>
+        </div>
+
+        <!-- Carrossel -->
+        <div class="swiper galeria-swiper">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <a href="https://picsum.photos/id/10/1400/1000" class="glightbox galeria-item" data-gallery="galeria"
+                aria-label="Ampliar foto 1">
+                <img src="https://picsum.photos/id/10/600/450" alt="Descrição da foto 1" width="600" height="450"
+                  loading="lazy">
+              </a>
+            </div>
+
+            <div class="swiper-slide">
+              <a href="https://picsum.photos/id/11/1400/1000" class="glightbox galeria-item" data-gallery="galeria"
+                aria-label="Ampliar foto 2">
+                <img src="https://picsum.photos/id/11/600/450" alt="Descrição da foto 2" width="600" height="450"
+                  loading="lazy">
+              </a>
+            </div>
+
+            <div class="swiper-slide">
+              <a href="https://picsum.photos/id/13/1400/1000" class="glightbox galeria-item" data-gallery="galeria"
+                aria-label="Ampliar foto 3">
+                <img src="https://picsum.photos/id/13/600/450" alt="Descrição da foto 3" width="600" height="450"
+                  loading="lazy">
+              </a>
+            </div>
+
+            <div class="swiper-slide">
+              <a href="https://picsum.photos/id/14/1400/1000" class="glightbox galeria-item" data-gallery="galeria"
+                aria-label="Ampliar foto 4">
+                <img src="https://picsum.photos/id/14/600/450" alt="Descrição da foto 4" width="600" height="450"
+                  loading="lazy">
+              </a>
+            </div>
+
+            <div class="swiper-slide">
+              <a href="https://picsum.photos/id/15/1400/1000" class="glightbox galeria-item" data-gallery="galeria"
+                aria-label="Ampliar foto 5">
+                <img src="https://picsum.photos/id/15/600/450" alt="Descrição da foto 5" width="600" height="450"
+                  loading="lazy">
+              </a>
+            </div>
+
+            <div class="swiper-slide">
+              <a href="assets/img/img-01.jpg" class="glightbox galeria-item" data-gallery="galeria"
+                aria-label="Ampliar foto 6">
+                <img src="assets/img/img-01.jpg" alt="Descrição da foto 6" width="600" height="450" loading="lazy">
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Setas: ficam FORA do carrossel, abaixo dele, alinhadas à direita -->
+        <div class="galeria-setas">
+          <button class="galeria-seta galeria-anterior" type="button" aria-label="Foto anterior">
+            <i class="bi bi-arrow-left" aria-hidden="true"></i>
+          </button>
+          <button class="galeria-seta galeria-proxima" type="button" aria-label="Próxima foto">
+            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+
+
+
+    <!-- =====================================================================
+         CLIENTES | layout "logos-carrossel" (Swiper, movimento contínuo)
+         Desktop: 5 logos | menores telas: 4, 3 e 2 logos (configurado no main.js)
+         Anda sozinho, sem pausas e sem setas. Cada pontinho = uma "linha" inteira.
+         Logos em PNG de 320 x 200 px, na pasta assets/img/.
+         Para adicionar um cliente, copie um bloco <div class="swiper-slide">.
+         ===================================================================== -->
+    <section id="clientes" class="secao secao-fundo logos-carrossel">
+      <div class="container">
+
+        <!-- Cabeçalho da seção (padrão reutilizável) -->
+        <div class="secao-cabecalho">
+          <span class="secao-rotulo">Clientes</span>
+          <h2 class="secao-titulo">Quem confia em nós</h2>
+          <p class="secao-subtitulo">Frase curta que apresenta clientes e parceiros.</p>
+        </div>
+
+        <!-- Carrossel -->
+        <div class="swiper logos-swiper">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-amil.png" alt="Logotipo Amil" width="320"
+                  height="200" loading="lazy"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-asaprev.png" alt="Logotipo Asaprev"
+                  width="320" height="200" loading="lazy"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-bradesco.png" alt="Logotipo Bradesco"
+                  width="320" height="200" loading="lazy"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-cassi.png" alt="Logotipo Cassi"
+                  width="320" height="200" loading="lazy"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-geap-saude.png" alt="Logotipo Geap Saúde"
+                  width="320" height="200" loading="lazy"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-mediservice.png"
+                  alt="Logotipo Mediservice" width="320" height="200" loading="lazy"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-notredame.png" alt="Logotipo Notre Dame"
+                  width="320" height="200" loading="lazy"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-parana-clinicas.png"
+                  alt="Logotipo Paraná Clínicas" width="320" height="200" loading="lazy"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="logos-item"><img src="assets/img/clientes/conv-logo-pladisa.png" alt="Logotipo Pladisa"
+                  width="320" height="200" loading="lazy"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+    <!-- =====================================================================
+         CONTATO | layout "contato-whatsapp" (formulário que abre o WhatsApp)
+         Não envia dados para servidor: o main.js monta a mensagem e abre
+         o WhatsApp com o texto pronto.
+         TROCAR O NÚMERO em data-whatsapp: código do país + DDD + número,
+         só dígitos (ex.: 5551999999999). Mantenha igual ao do botão flutuante.
+         ===================================================================== -->
+    <section id="contato" class="secao contato-whatsapp">
+      <div class="container">
+
+        <!-- Cabeçalho da seção (padrão reutilizável) -->
+        <div class="secao-cabecalho">
+          <span class="secao-rotulo">Contato</span>
+          <h2 class="secao-titulo">Fale conosco</h2>
+          <p class="secao-subtitulo">Preencha os campos e continue a conversa pelo WhatsApp.</p>
+        </div>
+
+        <!-- novalidate: a validação é feita pelo main.js (mensagens do Bootstrap) -->
+        <form id="contatoForm" class="contato-form needs-validation" data-whatsapp="5551999999999" novalidate>
+
+          <div class="mb-3">
+            <label for="contatoNome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="contatoNome" name="nome" autocomplete="name" required>
+            <div class="invalid-feedback">Informe seu nome.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="contatoTelefone" class="form-label">Telefone</label>
+            <input type="tel" class="form-control" id="contatoTelefone" name="telefone" autocomplete="tel"
+              inputmode="tel" placeholder="(00) 00000-0000" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}" required>
+            <div class="invalid-feedback">Informe um telefone válido, com DDD.</div>
+          </div>
+
+          <div class="mb-4">
+            <label for="contatoMensagem" class="form-label">Mensagem</label>
+            <textarea class="form-control" id="contatoMensagem" name="mensagem" rows="4" required></textarea>
+            <div class="invalid-feedback">Escreva sua mensagem.</div>
+          </div>
+
+          <button type="submit" class="btn btn-cta">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Enviar pelo WhatsApp
+          </button>
+
+        </form>
+      </div>
+    </section>
+
+
+
+
+    <!-- =====================================================================
+         MAPA | layout "mapa-embed" (introdução discreta + Google Maps em largura total)
+         O mapa fica FORA do .container de propósito, para ocupar 100% da largura.
+         Para trocar o local: mude o texto depois de "q=" no src (use + no lugar
+         de espaços). Ex.: q=Rua+Exemplo,+123,+Taquari,+RS
+         ===================================================================== -->
+    <section id="mapa" class="mapa-embed" aria-label="Mapa de localização">
+
+      <!-- Cabeçalho da seção (padrão reutilizável) -->
+      <div class="secao secao-cabecalho pb-0">
+        <span class="secao-rotulo">localização</span>
+        <h2 class="secao-titulo">Venha nos visitar!</h2>
+      </div>
+
+      <!-- Mapa (largura total) -->
+      <iframe src="https://maps.google.com/maps?q=Taquari,+RS,+Brasil&hl=pt-BR&z=14&output=embed"
+        title="Mapa com a localização da empresa em Taquari, RS" width="100%" height="450" style="border:0;"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+
+
+
+
+
   </main>
 
 
@@ -397,14 +842,26 @@
     <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
   </button>
 
+  <!-- =====================================================================
+      BOTÃO FLUTUANTE DO WHATSAPP
+      Número: código do país + DDD + número, só dígitos (ex.: 5551999999999)
+      O texto depois de ?text= é a mensagem inicial (já codificada para URL).
+      Para remover o botão em um projeto, apague este bloco e o CSS "11".
+      ===================================================================== -->
+  <a class="whatsapp-flutuante"
+    href="https://wa.me/5551999999999?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+    target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+  </a>
+
 
   <!-- ===== JS de terceiros via CDN (Bootstrap bundle já inclui o Popper) ===== -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- ===== Bibliotecas OPCIONAIS: descomente só o que o projeto usar ===== -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
   <!-- Isotope precisa do imagesLoaded para calcular o layout depois que as imagens carregam -->
   <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>

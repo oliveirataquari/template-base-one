@@ -431,7 +431,7 @@ h6 {
 .voltar-topo {
   position: fixed;
   right: 1.25rem;
-  bottom: 1.25rem;
+  bottom: 5rem;
   z-index: 1020;
   /* abaixo do header (1030) */
   width: 3rem;
@@ -446,7 +446,7 @@ h6 {
   border: 0;
   border-radius: 50%;
   box-shadow: 0 4px 12px rgba(17, 24, 39, .15);
-
+  
   /* Estado inicial: escondido */
   opacity: 0;
   visibility: hidden;
@@ -469,6 +469,39 @@ h6 {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
 }
+
+
+
+
+/* =========================================================================
+   11. BOTÃO FLUTUANTE DO WHATSAPP
+   ========================================================================= */
+.whatsapp-flutuante {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1020;                   /* abaixo do header (1030) */
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: #fff;
+  background: var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(17, 24, 39, .15);
+  text-decoration: none;
+  transition: background-color .2s, transform .2s;
+}
+.whatsapp-flutuante:hover {
+  color: #fff;
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+.whatsapp-flutuante:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+
+
 
 
 /* =========================================================================
@@ -670,6 +703,366 @@ h6 {
   margin: 0;
   font-size: 1.15rem;
 }
+
+
+
+
+/* =========================================================================
+   10. FAQ | layout "faq-accordion"
+   ========================================================================= */
+
+/* Lista centralizada e estreita (melhor para leitura), com espaço entre os itens */
+.faq-lista {
+  max-width: 48rem;
+  margin: 0 auto;
+  display: grid;
+  gap: .75rem;
+}
+
+/* ----- Item (card) ----- */
+.faq-item {
+  overflow: hidden;                /* mantém o conteúdo dentro das bordas arredondadas */
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  transition: border-color .25s, box-shadow .25s;
+}
+/* Item aberto: borda azul e sombra leve (:has detecta o botão expandido) */
+.faq-item:has(.faq-pergunta[aria-expanded="true"]) {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 20px rgba(17, 24, 39, .06);
+}
+
+/* O <h3> só envolve o botão: tira a margem padrão */
+.faq-titulo { margin: 0; }
+
+/* ----- Pergunta (botão que ocupa a largura toda) ----- */
+.faq-pergunta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 1.5rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: left;
+  color: var(--color-text);
+  background: none;
+  border: 0;
+  transition: color .2s;
+}
+.faq-pergunta:hover { color: var(--color-primary); }
+.faq-pergunta:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+
+/* Ícone "+" que gira e vira "×" quando o item abre */
+.faq-pergunta i {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  transition: transform .3s;
+}
+.faq-pergunta[aria-expanded="true"] i { transform: rotate(45deg); }
+
+/* ----- Resposta (a animação de altura é do próprio Bootstrap) ----- */
+.faq-resposta {
+  margin: 0;
+  padding: 0 1.5rem 1.25rem;
+  color: var(--color-muted);
+}
+
+/* Respeita quem desativou animações no sistema */
+@media (prefers-reduced-motion: reduce) {
+  .faq-pergunta i { transition: none; }
+}
+
+
+
+
+
+
+/* =========================================================================
+   12. DEPOIMENTOS | layout "depoimentos-carrossel"
+   ========================================================================= */
+
+/* Pequeno respiro nas laterais para a borda dos cards não ser cortada pelo carrossel */
+.depoimentos-swiper {
+  padding: .25rem .25rem 0;
+}
+
+/* Todos os cards da mesma altura (o Swiper deixa o slide com altura automática) */
+.depoimentos-swiper .swiper-slide {
+  height: auto;
+}
+
+/* ----- Card (mesmo estilo do servicos-card, com conteúdo centralizado) ----- */
+.depoimentos-card {
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+}
+
+/* Nome do cliente */
+.depoimentos-nome {
+  margin-bottom: .5rem;
+  font-size: 1.15rem;
+}
+
+/* Ícone de pessoa antes do nome */
+.depoimentos-nome i {
+  margin-right: .25rem;
+  font-size: 1.25rem;
+  vertical-align: -.15rem;         /* alinha o ícone com o texto */
+  color: var(--color-primary);
+}
+
+/* Estrelas (ilustrativas). Para trocar a cor, mude o valor abaixo */
+.depoimentos-estrelas {
+  margin-bottom: 1rem;
+  font-size: .95rem;
+  letter-spacing: .15rem;
+  color: #f5b301;
+}
+
+/* Opinião */
+.depoimentos-texto {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* ----- Pontinhos de navegação (abaixo do carrossel) ----- */
+.depoimentos-pontos {
+  position: static;                /* sai do posicionamento absoluto do Swiper: fica abaixo dos cards */
+  margin-top: 1.75rem;
+  --swiper-pagination-color: var(--color-primary);
+  --swiper-pagination-bullet-inactive-color: var(--color-primary);
+  --swiper-pagination-bullet-inactive-opacity: .25;
+  --swiper-pagination-bullet-size: 9px;
+  --swiper-pagination-bullet-horizontal-gap: 5px;
+}
+
+
+
+/* =========================================================================
+   13. GALERIA | layout "galeria-carrossel" + estilo do lightbox (GLightbox)
+   ========================================================================= */
+
+/* Respiro nas laterais para a borda dos cards não ser cortada pelo carrossel */
+.galeria-swiper { padding: .25rem; }
+
+/* ----- Foto (link que envolve a imagem) ----- */
+.galeria-item {
+  display: block;
+  overflow: hidden;                /* a imagem não "vaza" ao dar zoom no hover */
+  border-radius: 1rem;
+  cursor: zoom-in;
+}
+.galeria-item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform .4s;
+}
+.galeria-item:hover img { transform: scale(1.05); }
+
+/* ----- Setas (abaixo do carrossel, canto direito) ----- */
+.galeria-setas {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  margin-top: 1.5rem;
+}
+.galeria-seta {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  transition: color .2s, background-color .2s, border-color .2s;
+}
+.galeria-seta:hover {
+  color: #fff;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.galeria-seta:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+/* ----- Lightbox (GLightbox) ----- */
+
+/* Fundo levemente escuro sobre o site */
+.glightbox-container .goverlay {
+  background: rgba(17, 24, 39, .7) !important;
+}
+
+/* Imagem ampliada com cantos arredondados */
+/* Imagem ampliada com cantos arredondados (mesmo raio dos cards do tema: 1rem) */
+.glightbox-container .gslide-media {
+  border-radius: 1rem;
+  overflow: hidden;                /* recorta qualquer canto quadrado que sobrar */
+}
+.glightbox-container .gslide-image img {
+  border-radius: 1rem;
+}
+
+/* Sombra suave que acompanha o arredondamento (a original do GLightbox é quadrada) */
+.glightbox-clean .gslide-media {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+/* Botão "X" para fechar */
+.glightbox-clean .gclose {
+  width: 2.5rem;
+  height: 2.5rem;
+  opacity: 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .15);
+  transition: background-color .2s;
+}
+.glightbox-clean .gclose:hover { background: rgba(255, 255, 255, .3); }
+
+
+
+
+/* =========================================================================
+   14. CLIENTES | layout "logos-carrossel"
+   Logos PNG brancos e transparentes: a seção usa o azul do tema como fundo.
+   ========================================================================= */
+
+/* Fundo azul da seção + textos do cabeçalho em branco */
+.logos-carrossel {
+  /* background: var(--color-primary); 
+}
+.logos-carrossel .secao-rotulo   { color: rgba(255, 255, 255, .75); }
+.logos-carrossel .secao-titulo   { color: #fff; }
+.logos-carrossel .secao-subtitulo { color: rgba(255, 255, 255, .8); }
+*/
+
+/* Respiro nas laterais */
+.logos-swiper { padding: .25rem; }
+
+/* Movimento contínuo: velocidade constante, sem "acelerar e frear" entre as trocas */
+.logos-swiper .swiper-wrapper {
+  transition-timing-function: linear;
+}
+
+/* ----- Logo (sem fundo e sem borda) ----- */
+.logos-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+.logos-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;           /* mesma proporção dos arquivos (320 x 200) */
+  object-fit: contain;             /* o logo nunca é cortado nem deformado */
+  filter: invert(1);
+  opacity: .5;
+
+  /* Impede que o navegador "arraste a imagem" no lugar de arrastar o carrossel */
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+
+
+
+/* =========================================================================
+   15. MAPA | layout "mapa-embed"
+   ========================================================================= */
+
+/* ----- Introdução acima do mapa (discreta) ----- */
+.mapa-intro {
+  padding-top: 3.5rem;
+  padding-bottom: 1.75rem;
+  text-align: center;
+}
+.mapa-titulo {
+  margin-bottom: .35rem;
+  font-size: 1.4rem;               /* menor que o .secao-titulo, para não competir */
+  font-weight: 600;
+}
+.mapa-endereco {
+  margin: 0;
+  color: var(--color-muted);
+}
+.mapa-endereco i {
+  margin-right: .25rem;
+  color: var(--color-primary);
+}
+
+/* ----- Mapa (largura total) ----- */
+.mapa-embed iframe {
+  display: block;                  /* tira o pequeno espaço que o navegador deixa abaixo do iframe */
+  width: 100%;
+  height: 450px;                   /* altura no desktop */
+  border: 0;
+}
+
+/* Altura menor no celular */
+@media (max-width: 767.98px) {
+  .mapa-embed iframe { height: 320px; }
+}
+
+
+
+
+
+
+/* =========================================================================
+   16. CONTATO | layout "contato-whatsapp"
+   ========================================================================= */
+
+/* Formulário dentro de um card branco, centralizado e estreito */
+.contato-form {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+}
+
+/* Rótulos dos campos */
+.contato-form .form-label {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: .9rem;
+}
+
+/* Campos com os cantos do tema e destaque azul ao digitar */
+.contato-form .form-control {
+  border-radius: .75rem;
+  padding: .7rem 1rem;
+}
+.contato-form .form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 .25rem rgba(var(--bs-primary-rgb), .2);
+}
+
+/* Botão de envio ocupa a largura toda do card */
+.contato-form .btn {
+  width: 100%;
+  padding: .8rem 1.6rem;
+  font-size: 1rem;
+}
+
+
+
+
 
 
 
