@@ -1224,6 +1224,7 @@ h6 {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 1rem;
+    box-shadow: 0 8px 16px rgba(17, 24, 39, .05);   /* sombra bem discreta */
 }
 
 /* Rótulos dos campos */
