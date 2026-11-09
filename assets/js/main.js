@@ -49,18 +49,62 @@
     });
   }
 
+
   /* ---------------------------------------------------------------------
      3. MENU MOBILE: fecha o painel depois de clicar em um link
      --------------------------------------------------------------------- */
-  const navmenu = document.getElementById("navmenu");
-  navmenu.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-      // Só fecha se o painel estiver aberto (no desktop ele nunca tem a classe .show)
-      if (navmenu.classList.contains("show")) {
-        bootstrap.Collapse.getOrCreateInstance(navmenu, { toggle: false }).hide();
-      }
+  /* ---------------------------------------------------------------------
+     3. MENU: painel mobile + submenus
+        - Clique em um link: fecha o painel mobile
+        - Clique na SETINHA de um item com submenu: abre/fecha o submenu
+          (mobile e telas de toque). No desktop com mouse, o submenu abre
+          sozinho ao passar o mouse (CSS), então a setinha só navega.
+        - Clique fora, tecla Esc ou mudar o tamanho da tela: fecha submenus abertos
+     --------------------------------------------------------------------- */
+    const navmenu = document.getElementById("navmenu");
+    const telaGrande = window.matchMedia("(min-width: 992px)");
+    const temMouse = window.matchMedia("(hover: hover)");
+
+    // Fecha todos os submenus abertos pelo toque
+    function fecharSubmenus() {
+      navmenu.querySelectorAll(".has-submenu.aberto").forEach(function (item) {
+        item.classList.remove("aberto");
+      });
+    }
+
+    navmenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function (evento) {
+
+        // Clique na setinha: abre/fecha o submenu e NÃO navega
+        const seta = evento.target.closest(".submenu-seta");
+        if (seta && !(telaGrande.matches && temMouse.matches)) {
+          evento.preventDefault();
+          seta.closest(".has-submenu").classList.toggle("aberto");
+          return;
+        }
+
+        // Clique em um link: fecha submenus e o painel mobile (se estiver aberto)
+        fecharSubmenus();
+        if (navmenu.classList.contains("show")) {
+          bootstrap.Collapse.getOrCreateInstance(navmenu, { toggle: false }).hide();
+        }
+      });
     });
-  });
+
+    // Clique fora de um item com submenu: fecha os abertos
+    document.addEventListener("click", function (evento) {
+      if (!evento.target.closest(".has-submenu")) fecharSubmenus();
+    });
+
+    // Tecla Esc fecha os submenus
+    document.addEventListener("keydown", function (evento) {
+      if (evento.key === "Escape") fecharSubmenus();
+    });
+
+    // Mudou entre celular e desktop: recomeça com tudo fechado
+    telaGrande.addEventListener("change", fecharSubmenus);
+
+
 
   /* ---------------------------------------------------------------------
      4. PORTFÓLIO (Isotope)

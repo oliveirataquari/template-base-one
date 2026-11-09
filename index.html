@@ -108,7 +108,14 @@
         <ul class="nav">
           <li class="nav-item"><a class="nav-link" href="#hero">Início</a></li>
           <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
-          <li class="nav-item"><a class="nav-link" href="#servicos">Serviços</a></li>
+          <li class="nav-item has-submenu">
+            <a class="nav-link" href="#servicos" aria-haspopup="true">Serviços <i class="bi bi-chevron-down submenu-seta" aria-hidden="true"></i></a>
+            <ul class="submenu">
+              <li><a href="#servicos">Serviço um</a></li>
+              <li><a href="#servicos">Serviço dois</a></li>
+              <li><a href="#servicos">Serviço três</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#portfolio">Portfólio</a></li>
           <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
         </ul>
@@ -702,8 +709,8 @@
         <!-- Cabeçalho da seção (padrão reutilizável) -->
         <div class="secao-cabecalho">
           <span class="secao-rotulo">Clientes</span>
-          <h2 class="secao-titulo">Quem confia em nós</h2>
-          <p class="secao-subtitulo">Frase curta que apresenta clientes e parceiros.</p>
+          <!-- <h2 class="secao-titulo">Quem confia em nós</h2>
+          <p class="secao-subtitulo">Frase curta que apresenta clientes e parceiros.</p> -->
         </div>
 
         <!-- Carrossel -->
@@ -805,6 +812,8 @@
     </section>
 
 
+    
+
 
 
     <!-- =====================================================================
@@ -831,8 +840,75 @@
 
 
 
-
   </main>
+
+
+
+
+  <!-- =====================================================================
+       RODAPÉ | layout "rodape" (fundo azul do tema, letras brancas)
+       Colunas: marca | links rápidos | contato | redes sociais
+       Desktop: 4 colunas | Tablet: 2 colunas | Mobile: 1 coluna
+       ===================================================================== -->
+
+<footer id="rodape" class="rodape">
+    <div class="container">
+      <div class="row gy-4">
+
+        <!-- Coluna 1: marca + frase curta -->
+        <div class="col-md-6 col-lg-4">
+          <a href="index.html" class="logo" aria-label="Nome da Empresa - página inicial">
+            <i class="bi bi-layers-fill" aria-hidden="true"></i>
+            <span>BASE</span>
+          </a>
+          <p class="rodape-texto">Frase curta que resume a empresa e o que ela oferece.</p>
+        </div>
+
+        <!-- Coluna 2: links rápidos (mesmas seções do menu) -->
+        <div class="col-12 col-md-3 col-lg-2">
+          <h3 class="rodape-titulo">Links</h3>
+          <ul class="rodape-lista">
+            <li><a href="#hero">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: contato -->
+        <div class="col-12 col-md-3 col-lg-3">
+          <h3 class="rodape-titulo">Contato</h3>
+          <ul class="rodape-lista rodape-contato">
+            <li><i class="bi bi-geo-alt-fill" aria-hidden="true"></i><span>Taquari, RS</span></li>
+            <li><i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:+5551999999999">(51) 99999-9999</a></li>
+            <li><i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: redes sociais (troque os links; apague os ícones que não usar) -->
+        <div class="col-md-6 col-lg-3">
+          <h3 class="rodape-titulo">Redes sociais</h3>
+          <div class="rodape-redes">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="https://wa.me/5551999999999" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Faixa de copyright -->
+    <div class="rodape-copy">
+      <div class="container">
+        &copy; 2026 Nome da Empresa. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  
+
 
 
   <!-- =====================================================================

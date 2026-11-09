@@ -91,6 +91,7 @@ h6 {
 .secao {
   padding: 5rem 0;
 }
+
 /* Rótulo pequeno acima do título (ex.: "SOBRE NÓS") */
 .secao-rotulo {
   display: inline-block;
@@ -102,6 +103,7 @@ h6 {
   text-transform: uppercase;
   color: var(--color-primary);
 }
+
 /* Título da seção (tamanho se ajusta à largura da tela) */
 .secao-titulo {
   font-size: clamp(1.6rem, 3.5vw, 2.25rem);
@@ -109,6 +111,7 @@ h6 {
   line-height: 1.25;
   margin-bottom: 1rem;
 }
+
 /* Variação: fundo azul claro (use junto com .secao para alternar o ritmo da página) */
 .secao-fundo {
   background: rgba(var(--bs-primary-rgb), .08);
@@ -333,6 +336,116 @@ h6 {
   }
 }
 
+/* =========================================================================
+   ?? SUBMENU (dentro do menu principal)
+   Desktop: abre ao passar o mouse | Mobile: abre ao tocar na setinha
+   ========================================================================= */
+
+/* Item com submenu: texto + setinha lado a lado */
+.has-submenu > .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .35rem;
+}
+.submenu-seta {
+  font-size: .7rem;
+  transition: transform .25s;
+}
+
+/* Lista e links do submenu */
+.submenu {
+  list-style: none;
+  margin: 0;
+  margin-top:3px !important;
+  padding: 0;
+}
+.submenu a {
+  display: block;
+  padding: .55rem 1rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: .9rem;
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: .5rem;
+  transition: color .2s, background-color .2s;
+}
+.submenu a:hover,
+.submenu a:focus-visible {
+  color: var(--color-primary);
+  background: rgba(var(--bs-primary-rgb), .08);
+}
+
+/* ----- MOBILE: submenu escondido; a classe .aberto (main.js) mostra ----- */
+@media (max-width: 991.98px) {
+  .submenu { display: none; padding: 0 0 .25rem 1rem; }
+  .has-submenu.aberto > .submenu { display: block; }
+  .has-submenu.aberto > .nav-link .submenu-seta { transform: rotate(180deg); }
+
+  /* Área de toque da setinha maior (mais fácil de acertar com o dedo) */
+  .submenu-seta {
+    padding: .5rem .75rem;
+    margin: -.5rem -.75rem -.5rem 0;
+    font-size: .85rem;
+  }
+}
+
+/* ----- DESKTOP: bloco flutuante com sombra, abre no hover ou com o teclado ----- */
+@media (min-width: 992px) {
+  .navmenu .has-submenu { position: relative; }
+  .has-submenu > .nav-link { display: inline-flex; }
+
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 14rem;
+    margin-top: .9rem;               /* afasta o bloco do header, como se flutuasse */
+    padding: .5rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: .75rem;
+    box-shadow: 0 12px 32px rgba(17, 24, 39, .14);   /* sombra discreta */
+
+    /* Escondido por padrão, com leve subida ao aparecer */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity .2s, transform .2s, visibility .2s;
+  }
+
+  /* "Ponte" invisível sobre o espaço entre o item e o bloco: o submenu não fecha ao descer o mouse */
+  .submenu::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1rem;
+    height: 1rem;
+  }
+
+  /* Aberto: mouse em cima, navegação por teclado, ou toque (.aberto) */
+  .has-submenu:hover > .submenu,
+  .has-submenu:has(:focus-visible) > .submenu,
+  .has-submenu.aberto > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  /* Setinha gira quando aberto */
+  .has-submenu:hover > .nav-link .submenu-seta,
+  .has-submenu:has(:focus-visible) > .nav-link .submenu-seta,
+  .has-submenu.aberto > .nav-link .submenu-seta {
+    transform: rotate(180deg);
+  }
+}
+
+
+
+
+
 
 /* =========================================================================
    4. BLOCO TEMPORÁRIO DE TESTE (apagar junto com os <section class="secao-teste">)
@@ -446,7 +559,7 @@ h6 {
   border: 0;
   border-radius: 50%;
   box-shadow: 0 4px 12px rgba(17, 24, 39, .15);
-  
+
   /* Estado inicial: escondido */
   opacity: 0;
   visibility: hidden;
@@ -480,7 +593,8 @@ h6 {
   position: fixed;
   right: 1.25rem;
   bottom: 1.25rem;
-  z-index: 1020;                   /* abaixo do header (1030) */
+  z-index: 1020;
+  /* abaixo do header (1030) */
   width: 3rem;
   height: 3rem;
   display: flex;
@@ -494,12 +608,17 @@ h6 {
   text-decoration: none;
   transition: background-color .2s, transform .2s;
 }
+
 .whatsapp-flutuante:hover {
   color: #fff;
   background: var(--color-primary-dark);
   transform: translateY(-2px);
 }
-.whatsapp-flutuante:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+
+.whatsapp-flutuante:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
 
 
 
@@ -519,6 +638,7 @@ h6 {
   color: var(--color-primary);
   font-size: 4rem;
 }
+
 /*
 .sobre-visual {
   aspect-ratio: 4 / 3;
@@ -577,6 +697,7 @@ h6 {
   margin: 0 auto 3rem;
   text-align: center;
 }
+
 .secao-subtitulo {
   margin: 0;
   color: var(--color-muted);
@@ -584,13 +705,15 @@ h6 {
 
 /* ----- Card ----- */
 .servicos-card {
-  height: 100%;                    /* todos os cards da mesma linha ficam com a mesma altura */
+  height: 100%;
+  /* todos os cards da mesma linha ficam com a mesma altura */
   padding: 2rem;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 1rem;
   transition: transform .25s, box-shadow .25s, border-color .25s;
 }
+
 .servicos-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-primary);
@@ -616,6 +739,7 @@ h6 {
   margin-bottom: .5rem;
   font-size: 1.15rem;
 }
+
 .servicos-card-texto {
   margin: 0;
   color: var(--color-muted);
@@ -637,6 +761,7 @@ h6 {
   gap: .5rem;
   margin-bottom: 2.5rem;
 }
+
 .portfolio-filtro {
   padding: .45rem 1.2rem;
   font-family: var(--font-heading);
@@ -645,11 +770,20 @@ h6 {
   color: var(--color-text);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 50rem;            /* formato "pílula", igual aos outros botões */
+  border-radius: 50rem;
+  /* formato "pílula", igual aos outros botões */
   transition: color .2s, background-color .2s, border-color .2s;
 }
-.portfolio-filtro:hover { color: var(--color-primary); border-color: var(--color-primary); }
-.portfolio-filtro:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+.portfolio-filtro:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.portfolio-filtro:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
 
 /* Filtro selecionado (a classe .ativo é trocada pelo main.js) */
 .portfolio-filtro.ativo {
@@ -660,12 +794,14 @@ h6 {
 
 /* ----- Card ----- */
 .portfolio-card {
-  overflow: hidden;                /* mantém a imagem dentro das bordas arredondadas */
+  overflow: hidden;
+  /* mantém a imagem dentro das bordas arredondadas */
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 1rem;
   transition: transform .25s, box-shadow .25s, border-color .25s;
 }
+
 .portfolio-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-primary);
@@ -682,6 +818,7 @@ h6 {
   color: var(--color-primary);
   font-size: 3rem;
 }
+
 .portfolio-card-imagem img {
   width: 100%;
   height: 100%;
@@ -689,7 +826,10 @@ h6 {
 }
 
 /* Texto abaixo da imagem */
-.portfolio-card-corpo { padding: 1.25rem 1.5rem 1.5rem; }
+.portfolio-card-corpo {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
 .portfolio-card-categoria {
   display: block;
   margin-bottom: .25rem;
@@ -699,6 +839,7 @@ h6 {
   text-transform: uppercase;
   color: var(--color-muted);
 }
+
 .portfolio-card-titulo {
   margin: 0;
   font-size: 1.15rem;
@@ -721,12 +862,14 @@ h6 {
 
 /* ----- Item (card) ----- */
 .faq-item {
-  overflow: hidden;                /* mantém o conteúdo dentro das bordas arredondadas */
+  overflow: hidden;
+  /* mantém o conteúdo dentro das bordas arredondadas */
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 1rem;
   transition: border-color .25s, box-shadow .25s;
 }
+
 /* Item aberto: borda azul e sombra leve (:has detecta o botão expandido) */
 .faq-item:has(.faq-pergunta[aria-expanded="true"]) {
   border-color: var(--color-primary);
@@ -734,7 +877,9 @@ h6 {
 }
 
 /* O <h3> só envolve o botão: tira a margem padrão */
-.faq-titulo { margin: 0; }
+.faq-titulo {
+  margin: 0;
+}
 
 /* ----- Pergunta (botão que ocupa a largura toda) ----- */
 .faq-pergunta {
@@ -753,8 +898,15 @@ h6 {
   border: 0;
   transition: color .2s;
 }
-.faq-pergunta:hover { color: var(--color-primary); }
-.faq-pergunta:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+
+.faq-pergunta:hover {
+  color: var(--color-primary);
+}
+
+.faq-pergunta:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
 
 /* Ícone "+" que gira e vira "×" quando o item abre */
 .faq-pergunta i {
@@ -763,7 +915,10 @@ h6 {
   color: var(--color-primary);
   transition: transform .3s;
 }
-.faq-pergunta[aria-expanded="true"] i { transform: rotate(45deg); }
+
+.faq-pergunta[aria-expanded="true"] i {
+  transform: rotate(45deg);
+}
 
 /* ----- Resposta (a animação de altura é do próprio Bootstrap) ----- */
 .faq-resposta {
@@ -774,7 +929,9 @@ h6 {
 
 /* Respeita quem desativou animações no sistema */
 @media (prefers-reduced-motion: reduce) {
-  .faq-pergunta i { transition: none; }
+  .faq-pergunta i {
+    transition: none;
+  }
 }
 
 
@@ -816,7 +973,8 @@ h6 {
 .depoimentos-nome i {
   margin-right: .25rem;
   font-size: 1.25rem;
-  vertical-align: -.15rem;         /* alinha o ícone com o texto */
+  vertical-align: -.15rem;
+  /* alinha o ícone com o texto */
   color: var(--color-primary);
 }
 
@@ -836,7 +994,8 @@ h6 {
 
 /* ----- Pontinhos de navegação (abaixo do carrossel) ----- */
 .depoimentos-pontos {
-  position: static;                /* sai do posicionamento absoluto do Swiper: fica abaixo dos cards */
+  position: static;
+  /* sai do posicionamento absoluto do Swiper: fica abaixo dos cards */
   margin-top: 1.75rem;
   --swiper-pagination-color: var(--color-primary);
   --swiper-pagination-bullet-inactive-color: var(--color-primary);
@@ -852,15 +1011,19 @@ h6 {
    ========================================================================= */
 
 /* Respiro nas laterais para a borda dos cards não ser cortada pelo carrossel */
-.galeria-swiper { padding: .25rem; }
+.galeria-swiper {
+  padding: .25rem;
+}
 
 /* ----- Foto (link que envolve a imagem) ----- */
 .galeria-item {
   display: block;
-  overflow: hidden;                /* a imagem não "vaza" ao dar zoom no hover */
+  overflow: hidden;
+  /* a imagem não "vaza" ao dar zoom no hover */
   border-radius: 1rem;
   cursor: zoom-in;
 }
+
 .galeria-item img {
   display: block;
   width: 100%;
@@ -868,7 +1031,10 @@ h6 {
   object-fit: cover;
   transition: transform .4s;
 }
-.galeria-item:hover img { transform: scale(1.05); }
+
+.galeria-item:hover img {
+  transform: scale(1.05);
+}
 
 /* ----- Setas (abaixo do carrossel, canto direito) ----- */
 .galeria-setas {
@@ -877,6 +1043,7 @@ h6 {
   gap: .5rem;
   margin-top: 1.5rem;
 }
+
 .galeria-seta {
   width: 2.75rem;
   height: 2.75rem;
@@ -891,12 +1058,17 @@ h6 {
   border-radius: 50%;
   transition: color .2s, background-color .2s, border-color .2s;
 }
+
 .galeria-seta:hover {
   color: #fff;
   background: var(--color-primary);
   border-color: var(--color-primary);
 }
-.galeria-seta:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+.galeria-seta:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
 
 /* ----- Lightbox (GLightbox) ----- */
 
@@ -909,8 +1081,10 @@ h6 {
 /* Imagem ampliada com cantos arredondados (mesmo raio dos cards do tema: 1rem) */
 .glightbox-container .gslide-media {
   border-radius: 1rem;
-  overflow: hidden;                /* recorta qualquer canto quadrado que sobrar */
+  overflow: hidden;
+  /* recorta qualquer canto quadrado que sobrar */
 }
+
 .glightbox-container .gslide-image img {
   border-radius: 1rem;
 }
@@ -929,7 +1103,10 @@ h6 {
   background: rgba(255, 255, 255, .15);
   transition: background-color .2s;
 }
-.glightbox-clean .gclose:hover { background: rgba(255, 255, 255, .3); }
+
+.glightbox-clean .gclose:hover {
+  background: rgba(255, 255, 255, .3);
+}
 
 
 
@@ -940,8 +1117,8 @@ h6 {
    ========================================================================= */
 
 /* Fundo azul da seção + textos do cabeçalho em branco */
-.logos-carrossel {
-  /* background: var(--color-primary); 
+/*.logos-carrossel {
+   background: var(--color-primary); 
 }
 .logos-carrossel .secao-rotulo   { color: rgba(255, 255, 255, .75); }
 .logos-carrossel .secao-titulo   { color: #fff; }
@@ -949,7 +1126,9 @@ h6 {
 */
 
 /* Respiro nas laterais */
-.logos-swiper { padding: .25rem; }
+.logos-swiper {
+  padding: .25rem;
+}
 
 /* Movimento contínuo: velocidade constante, sem "acelerar e frear" entre as trocas */
 .logos-swiper .swiper-wrapper {
@@ -963,12 +1142,15 @@ h6 {
   justify-content: center;
   padding: 1rem 2rem;
 }
+
 .logos-item img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 10;           /* mesma proporção dos arquivos (320 x 200) */
-  object-fit: contain;             /* o logo nunca é cortado nem deformado */
+  aspect-ratio: 16 / 10;
+  /* mesma proporção dos arquivos (320 x 200) */
+  object-fit: contain;
+  /* o logo nunca é cortado nem deformado */
   filter: invert(1);
   opacity: .5;
 
@@ -990,15 +1172,19 @@ h6 {
   padding-bottom: 1.75rem;
   text-align: center;
 }
+
 .mapa-titulo {
   margin-bottom: .35rem;
-  font-size: 1.4rem;               /* menor que o .secao-titulo, para não competir */
+  font-size: 1.4rem;
+  /* menor que o .secao-titulo, para não competir */
   font-weight: 600;
 }
+
 .mapa-endereco {
   margin: 0;
   color: var(--color-muted);
 }
+
 .mapa-endereco i {
   margin-right: .25rem;
   color: var(--color-primary);
@@ -1006,15 +1192,19 @@ h6 {
 
 /* ----- Mapa (largura total) ----- */
 .mapa-embed iframe {
-  display: block;                  /* tira o pequeno espaço que o navegador deixa abaixo do iframe */
+  display: block;
+  /* tira o pequeno espaço que o navegador deixa abaixo do iframe */
   width: 100%;
-  height: 450px;                   /* altura no desktop */
+  height: 450px;
+  /* altura no desktop */
   border: 0;
 }
 
 /* Altura menor no celular */
 @media (max-width: 767.98px) {
-  .mapa-embed iframe { height: 320px; }
+  .mapa-embed iframe {
+    height: 320px;
+  }
 }
 
 
@@ -1048,6 +1238,7 @@ h6 {
   border-radius: .75rem;
   padding: .7rem 1rem;
 }
+
 .contato-form .form-control:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 .25rem rgba(var(--bs-primary-rgb), .2);
@@ -1063,6 +1254,121 @@ h6 {
 
 
 
+/* =========================================================================
+   17. RODAPÉ | layout "rodape"
+   Fundo azul do tema, letras brancas.
+   ========================================================================= */
+.rodape {
+  padding-top: 4rem;
+  color: #fff;
+  background: var(--color-primary);
+}
+
+/* Links em branco levemente transparente; ficam 100% brancos ao passar o mouse */
+.rodape a {
+  color: rgba(255, 255, 255, .8);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.rodape a:hover {
+  color: #fff;
+}
+
+/* Logo em branco (o .logo original é escuro com ícone azul) */
+.rodape .logo,
+.rodape .logo i {
+  color: #fff;
+}
+
+/* Frase da marca */
+.rodape-texto {
+  max-width: 22rem;
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, .8);
+}
+
+/* Títulos das colunas */
+.rodape-titulo {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Listas (links e contato) */
+.rodape-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .6rem;
+}
+
+.rodape-contato li {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  color: rgba(255, 255, 255, .8);
+}
+
+.rodape-contato i {
+  margin-top: .2rem;
+  color: #fff;
+}
+
+/* Permite quebrar textos longos (como o e-mail) dentro da coluna,
+   evitando que a página ganhe barra de rolagem horizontal */
+.rodape-contato a,
+.rodape-contato span {
+  min-width: 0;                    /* deixa o item flex encolher abaixo do tamanho do texto */
+  overflow-wrap: anywhere;         /* quebra a linha em qualquer ponto se for preciso */
+}
+
+/* Redes sociais: ícones em círculos com borda branca (invertem ao passar o mouse) */
+.rodape-redes {
+  display: flex;
+  gap: .5rem;
+}
+
+.rodape-redes a {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 50%;
+  transition: color .2s, background-color .2s, border-color .2s;
+}
+
+.rodape-redes a:hover {
+  color: var(--color-primary);
+  background: #fff;
+  border-color: #fff;
+}
+
+/* Faixa de copyright */
+.rodape-copy {
+  margin-top: 3rem;
+  padding: 1.25rem 0;
+  text-align: center;
+  font-size: .9rem;
+  color: rgba(255, 255, 255, .75);
+  border-top: 1px solid rgba(255, 255, 255, .2);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1072,6 +1378,6 @@ h6 {
    8. Tiago | CSS personalizado
    ========================================================================= */
 
-   .hide {
-    display: none !important;
-   }
+.hide {
+  display: none !important;
+}
