@@ -34,8 +34,13 @@
   /* linhas e bordas suaves */
 
   /* Medidas */
-  --header-h: 72px;
   /* altura do cabeçalho fixo */
+  --header-h: 72px;
+
+  /* Altura dos heros, medida a partir do TOPO DA PÁGINA (inclui a área do header).
+     Tela total: 100svh  |  Altura fixa: 600px, 70vh, etc. */
+  --hero-altura: 100svh;
+
 
   /* Faz o Bootstrap usar a nossa cor principal (botões, links, utilitários) */
   --bs-primary: #2f6fed;
@@ -465,7 +470,7 @@ h6 {
 
 /* Ocupa a altura da tela menos o header fixo, com o conteúdo centralizado */
 .hero {
-  min-height: calc(100vh - var(--header-h));
+  min-height: calc(var(--hero-altura) - var(--header-h));   /* o header ocupa o topo, então subtraímos a altura dele */
   display: flex;
   align-items: center;
   padding: 4rem 0;
@@ -535,6 +540,125 @@ h6 {
   object-fit: cover;
   border-radius: inherit;
 }
+
+
+
+/* =========================================================================
+   ??. HERO-VIDEO (opcional) + HEADER TRANSPARENTE
+   O header só fica transparente se a tag <header> tiver a classe
+   "header-sobre-hero" (no index.html). Sem ela, nada abaixo afeta o header.
+   ========================================================================= */
+
+/* ----- Header transparente (só no topo da página, antes de rolar) ----- */
+
+/* Transição suave entre os dois estados */
+.header::before { transition: background-color .25s; }
+.logo, .logo i  { transition: color .25s; }
+
+/* Fundo sem cor e sem desfoque */
+.header-sobre-hero:not(.scrolled)::before {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Logo e hambúrguer em branco */
+.header-sobre-hero:not(.scrolled) .logo,
+.header-sobre-hero:not(.scrolled) .logo i,
+.header-sobre-hero:not(.scrolled) .header-toggler {
+  color: #fff;
+}
+
+/* Logo em imagem: mostra a versão branca no topo e a escura depois de rolar */
+.logo-branco { display: none; }
+.header-sobre-hero:not(.scrolled) .logo-branco { display: block; }
+.header-sobre-hero:not(.scrolled) .logo-escuro { display: none; }
+
+/* Menu em branco só no DESKTOP (no celular o painel tem fundo branco e mantém as letras escuras) */
+@media (min-width: 992px) {
+  .header-sobre-hero:not(.scrolled) .navmenu .nav-link { color: #fff; }
+  .header-sobre-hero:not(.scrolled) .navmenu .nav-link:hover { color: rgba(255, 255, 255, .75); }
+  .header-sobre-hero:not(.scrolled) .navmenu .nav-link::after { background: #fff; }
+}
+
+/* ----- Seção hero-video ----- */
+.hero-video {
+  --hero-video-overlay: rgba(17, 24, 39, .55);   /* AJUSTE AQUI: cor e escuridão (último número: 0 a 1) */
+
+  position: relative;
+  overflow: hidden;
+  height: var(--hero-altura);      /* tela total ou altura fixa: veja --hero-altura no :root */
+  margin-top: calc(-1 * var(--header-h));   /* sobe por trás do header (o body tem padding-top) */
+  color: #fff;
+}
+
+/* Vídeo preenchendo toda a área (cover: corta o excesso, nunca deforma) */
+.hero-video-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Camada escura à frente do vídeo */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-video-overlay);
+}
+
+/* Conteúdo centralizado sobre o vídeo */
+.hero-video-conteudo {
+  position: relative;              /* fica à frente do overlay */
+  z-index: 1;
+  height: 100%;
+  padding-top: var(--header-h);    /* centraliza na área abaixo do header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-video-titulo {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.hero-video-texto {
+  max-width: 36rem;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, .9);
+}
+.hero-video-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+}
+.hero-video .btn {
+  padding: .75rem 1.6rem;
+  font-size: 1rem;
+}
+
+/* Botão de contorno em branco (sobre o vídeo) */
+.hero-video .btn-cta-outline {
+  --bs-btn-color: #fff;
+  --bs-btn-border-color: #fff;
+  --bs-btn-hover-color: var(--color-primary);
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  --bs-btn-active-color: var(--color-primary);
+  --bs-btn-active-bg: #fff;
+  --bs-btn-active-border-color: #fff;
+  --bs-btn-focus-shadow-rgb: 255, 255, 255;
+}
+
+
+
 
 
 

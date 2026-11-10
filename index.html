@@ -94,10 +94,14 @@
        Desktop: [Logo] ........ [Menu centralizado] ........ [Botão]
        Mobile : [Logo] ................... [Botão] [Hambúrguer]
        ===================================================================== -->
-  <header id="header" class="header">
+
+  <header id="header" class="header header-sobre-hero">
     <div class="container header-inner">
 
       <!-- 1) LOGO (esquerda) | para usar imagem: <img src="assets/img/logo.png" alt="Nome da Empresa" height="36"> -->
+      <!--<img class="logo-img logo-branco" src="assets/img/logo-branco.png" alt="Nome da Empresa" height="36"> -->
+      <!--<img class="logo-img logo-escuro" src="assets/img/logo.png" alt="" height="36" aria-hidden="true"> -->
+
       <a href="index.html" class="logo" aria-label="Nome da Empresa - página inicial">
         <i class="bi bi-layers-fill" aria-hidden="true"></i>
         <span>BASE</span>
@@ -109,7 +113,8 @@
           <li class="nav-item"><a class="nav-link" href="#hero">Início</a></li>
           <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
           <li class="nav-item has-submenu">
-            <a class="nav-link" href="#servicos" aria-haspopup="true">Serviços <i class="bi bi-chevron-down submenu-seta" aria-hidden="true"></i></a>
+            <a class="nav-link" href="#servicos" aria-haspopup="true">Serviços <i
+                class="bi bi-chevron-down submenu-seta" aria-hidden="true"></i></a>
             <ul class="submenu">
               <li><a href="#servicos">Serviço um</a></li>
               <li><a href="#servicos">Serviço dois</a></li>
@@ -146,9 +151,45 @@
 
 
     <!-- =====================================================================
-         HERO (primeira seção da página)
+         HERO-VIDEO (opcional) | vídeo em background, 100vh
+         Use ESTE hero no lugar do hero normal (os dois usam id="hero").
+         Vídeo: coloque em assets/video/ (crie a pasta). MP4 (H.264) de até
+         ~5 MB e sem áudio carrega melhor. O "muted" é obrigatório para
+         o autoplay funcionar nos navegadores.
+         A escuridão do overlay se ajusta no CSS: --hero-video-overlay.
+         ===================================================================== -->
+    <section id="hero" class="hero-video">
+
+      <!-- Vídeo de fundo -->
+      <video class="hero-video-media" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+        <!-- poster="assets/img/hero-video-poster.jpg"  (imagem mostrada enquanto o vídeo carrega; opcional) -->
+        <source src="assets/img/hero.mp4" type="video/mp4">
+      </video>
+
+      <!-- Camada escura à frente do vídeo -->
+      <div class="hero-video-overlay"></div>
+
+      <!-- Conteúdo -->
+      <div class="container hero-video-conteudo">
+        <div>
+          <h1 class="hero-video-titulo">Título principal com a proposta de valor</h1>
+          <p class="hero-video-texto">
+            Texto curto de apoio, com duas ou três linhas explicando o que a empresa faz e para quem.
+          </p>
+          <div class="hero-video-acoes">
+            <a href="#servicos" class="btn btn-cta">Conheça nossos serviços</a>
+            <a href="#contato" class="btn btn-cta-outline">Fale conosco</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================================
+         HERO 2 (segunda seção da página)
     ===================================================================== -->
-    <section id="hero" class="hero">
+    <section id="hero2" class="hero">
       <div class="container">
         <div class="row align-items-center gy-5">
 
@@ -812,7 +853,7 @@
     </section>
 
 
-    
+
 
 
 
@@ -851,7 +892,7 @@
        Desktop: 4 colunas | Tablet: 2 colunas | Mobile: 1 coluna
        ===================================================================== -->
 
-<footer id="rodape" class="rodape">
+  <footer id="rodape" class="rodape">
     <div class="container">
       <div class="row gy-4">
 
@@ -881,8 +922,10 @@
           <h3 class="rodape-titulo">Contato</h3>
           <ul class="rodape-lista rodape-contato">
             <li><i class="bi bi-geo-alt-fill" aria-hidden="true"></i><span>Taquari, RS</span></li>
-            <li><i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:+5551999999999">(51) 99999-9999</a></li>
-            <li><i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a></li>
+            <li><i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:+5551999999999">(51) 99999-9999</a>
+            </li>
+            <li><i class="bi bi-envelope-fill" aria-hidden="true"></i><a
+                href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a></li>
           </ul>
         </div>
 
@@ -890,9 +933,12 @@
         <div class="col-md-6 col-lg-3">
           <h3 class="rodape-titulo">Redes sociais</h3>
           <div class="rodape-redes">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-            <a href="https://wa.me/5551999999999" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i
+                class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i
+                class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="https://wa.me/5551999999999" target="_blank" rel="noopener" aria-label="WhatsApp"><i
+                class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
           </div>
         </div>
 
@@ -907,7 +953,7 @@
     </div>
   </footer>
 
-  
+
 
 
 
