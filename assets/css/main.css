@@ -20,33 +20,33 @@
   --font-heading: "Poppins", system-ui, sans-serif;
 
   /* Cores do template */
-  --color-primary: #2f6fed;
-  /* cor principal (botões, links, destaque) */
-  --color-primary-dark: #1f55c4;
-  /* cor principal no hover */
-  --color-text: #1f2937;
-  /* texto padrão */
-  --color-muted: #6b7280;
-  /* texto secundário */
-  --color-bg: #ffffff;
-  /* fundo da página */
-  --color-border: #e5e7eb;
-  /* linhas e bordas suaves */
+  --color-primary: #2f6fed;        /* cor principal (botões, links, destaque) */
+  --color-primary-dark: #1f55c4;   /* cor principal no hover */
+  --color-text: #1f2937;           /* texto padrão */
+  --color-muted: #6b7280;          /* texto secundário */
+  --color-bg: #ffffff;             /* fundo da página */
+  --color-border: #e5e7eb;         /* linhas e bordas suaves */
 
   /* Medidas */
-  /* altura do cabeçalho fixo */
-  --header-h: 72px;
+  --header-h: 72px;                /* altura do cabeçalho fixo */
 
   /* Altura dos heros, medida a partir do TOPO DA PÁGINA (inclui a área do header).
      Tela total: 100svh  |  Altura fixa: 600px, 70vh, etc. */
   --hero-altura: 100svh;
-
 
   /* Faz o Bootstrap usar a nossa cor principal (botões, links, utilitários) */
   --bs-primary: #2f6fed;
   --bs-primary-rgb: 47, 111, 237;
   --bs-link-color: var(--color-primary);
   --bs-link-hover-color: var(--color-primary-dark);
+}
+
+/* Altura dos heros no celular (abaixo de 768px).
+   Tela total: 100svh | Altura fixa: 500px, 70svh, etc. */
+@media (max-width: 767.98px) {
+  :root {
+    --hero-altura: 70svh;
+  }
 }
 
 
@@ -347,12 +347,13 @@ h6 {
    ========================================================================= */
 
 /* Item com submenu: texto + setinha lado a lado */
-.has-submenu > .nav-link {
+.has-submenu>.nav-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: .35rem;
 }
+
 .submenu-seta {
   font-size: .7rem;
   transition: transform .25s;
@@ -362,9 +363,10 @@ h6 {
 .submenu {
   list-style: none;
   margin: 0;
-  margin-top:3px !important;
+  margin-top: 3px !important;
   padding: 0;
 }
+
 .submenu a {
   display: block;
   padding: .55rem 1rem;
@@ -376,6 +378,7 @@ h6 {
   border-radius: .5rem;
   transition: color .2s, background-color .2s;
 }
+
 .submenu a:hover,
 .submenu a:focus-visible {
   color: var(--color-primary);
@@ -384,9 +387,18 @@ h6 {
 
 /* ----- MOBILE: submenu escondido; a classe .aberto (main.js) mostra ----- */
 @media (max-width: 991.98px) {
-  .submenu { display: none; padding: 0 0 .25rem 1rem; }
-  .has-submenu.aberto > .submenu { display: block; }
-  .has-submenu.aberto > .nav-link .submenu-seta { transform: rotate(180deg); }
+  .submenu {
+    display: none;
+    padding: 0 0 .25rem 1rem;
+  }
+
+  .has-submenu.aberto>.submenu {
+    display: block;
+  }
+
+  .has-submenu.aberto>.nav-link .submenu-seta {
+    transform: rotate(180deg);
+  }
 
   /* Área de toque da setinha maior (mais fácil de acertar com o dedo) */
   .submenu-seta {
@@ -398,20 +410,27 @@ h6 {
 
 /* ----- DESKTOP: bloco flutuante com sombra, abre no hover ou com o teclado ----- */
 @media (min-width: 992px) {
-  .navmenu .has-submenu { position: relative; }
-  .has-submenu > .nav-link { display: inline-flex; }
+  .navmenu .has-submenu {
+    position: relative;
+  }
+
+  .has-submenu>.nav-link {
+    display: inline-flex;
+  }
 
   .submenu {
     position: absolute;
     top: 100%;
     left: 0;
     min-width: 14rem;
-    margin-top: .9rem;               /* afasta o bloco do header, como se flutuasse */
+    margin-top: .9rem;
+    /* afasta o bloco do header, como se flutuasse */
     padding: .5rem;
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: .75rem;
-    box-shadow: 0 12px 32px rgba(17, 24, 39, .14);   /* sombra discreta */
+    box-shadow: 0 12px 32px rgba(17, 24, 39, .14);
+    /* sombra discreta */
 
     /* Escondido por padrão, com leve subida ao aparecer */
     opacity: 0;
@@ -431,18 +450,18 @@ h6 {
   }
 
   /* Aberto: mouse em cima, navegação por teclado, ou toque (.aberto) */
-  .has-submenu:hover > .submenu,
-  .has-submenu:has(:focus-visible) > .submenu,
-  .has-submenu.aberto > .submenu {
+  .has-submenu:hover>.submenu,
+  .has-submenu:has(:focus-visible)>.submenu,
+  .has-submenu.aberto>.submenu {
     opacity: 1;
     visibility: visible;
     transform: none;
   }
 
   /* Setinha gira quando aberto */
-  .has-submenu:hover > .nav-link .submenu-seta,
-  .has-submenu:has(:focus-visible) > .nav-link .submenu-seta,
-  .has-submenu.aberto > .nav-link .submenu-seta {
+  .has-submenu:hover>.nav-link .submenu-seta,
+  .has-submenu:has(:focus-visible)>.nav-link .submenu-seta,
+  .has-submenu.aberto>.nav-link .submenu-seta {
     transform: rotate(180deg);
   }
 }
@@ -470,7 +489,8 @@ h6 {
 
 /* Ocupa a altura da tela menos o header fixo, com o conteúdo centralizado */
 .hero {
-  min-height: calc(var(--hero-altura) - var(--header-h));   /* o header ocupa o topo, então subtraímos a altura dele */
+  min-height: calc(var(--hero-altura) - var(--header-h));
+  /* o header ocupa o topo, então subtraímos a altura dele */
   display: flex;
   align-items: center;
   padding: 4rem 0;
@@ -552,8 +572,14 @@ h6 {
 /* ----- Header transparente (só no topo da página, antes de rolar) ----- */
 
 /* Transição suave entre os dois estados */
-.header::before { transition: background-color .25s; }
-.logo, .logo i  { transition: color .25s; }
+.header::before {
+  transition: background-color .25s;
+}
+
+.logo,
+.logo i {
+  transition: color .25s;
+}
 
 /* Fundo sem cor e sem desfoque */
 .header-sobre-hero:not(.scrolled)::before {
@@ -570,25 +596,44 @@ h6 {
 }
 
 /* Logo em imagem: mostra a versão branca no topo e a escura depois de rolar */
-.logo-branco { display: none; }
-.header-sobre-hero:not(.scrolled) .logo-branco { display: block; }
-.header-sobre-hero:not(.scrolled) .logo-escuro { display: none; }
+.logo-branco {
+  display: none;
+}
+
+.header-sobre-hero:not(.scrolled) .logo-branco {
+  display: block;
+}
+
+.header-sobre-hero:not(.scrolled) .logo-escuro {
+  display: none;
+}
 
 /* Menu em branco só no DESKTOP (no celular o painel tem fundo branco e mantém as letras escuras) */
 @media (min-width: 992px) {
-  .header-sobre-hero:not(.scrolled) .navmenu .nav-link { color: #fff; }
-  .header-sobre-hero:not(.scrolled) .navmenu .nav-link:hover { color: rgba(255, 255, 255, .75); }
-  .header-sobre-hero:not(.scrolled) .navmenu .nav-link::after { background: #fff; }
+  .header-sobre-hero:not(.scrolled) .navmenu .nav-link {
+    color: #fff;
+  }
+
+  .header-sobre-hero:not(.scrolled) .navmenu .nav-link:hover {
+    color: rgba(255, 255, 255, .75);
+  }
+
+  .header-sobre-hero:not(.scrolled) .navmenu .nav-link::after {
+    background: #fff;
+  }
 }
 
 /* ----- Seção hero-video ----- */
 .hero-video {
-  --hero-video-overlay: rgba(17, 24, 39, .55);   /* AJUSTE AQUI: cor e escuridão (último número: 0 a 1) */
+  --hero-video-overlay: rgba(17, 24, 39, .55);
+  /* AJUSTE AQUI: cor e escuridão (último número: 0 a 1) */
 
   position: relative;
   overflow: hidden;
-  height: var(--hero-altura);      /* tela total ou altura fixa: veja --hero-altura no :root */
-  margin-top: calc(-1 * var(--header-h));   /* sobe por trás do header (o body tem padding-top) */
+  height: var(--hero-altura);
+  /* tela total ou altura fixa: veja --hero-altura no :root */
+  margin-top: calc(-1 * var(--header-h));
+  /* sobe por trás do header (o body tem padding-top) */
   color: #fff;
 }
 
@@ -610,10 +655,12 @@ h6 {
 
 /* Conteúdo centralizado sobre o vídeo */
 .hero-video-conteudo {
-  position: relative;              /* fica à frente do overlay */
+  position: relative;
+  /* fica à frente do overlay */
   z-index: 1;
   height: 100%;
-  padding-top: var(--header-h);    /* centraliza na área abaixo do header */
+  padding-top: var(--header-h);
+  /* centraliza na área abaixo do header */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -627,18 +674,21 @@ h6 {
   margin-bottom: 1rem;
   color: #fff;
 }
+
 .hero-video-texto {
   max-width: 36rem;
   margin: 0 auto 2rem;
   font-size: 1.1rem;
   color: rgba(255, 255, 255, .9);
 }
+
 .hero-video-acoes {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: .75rem;
 }
+
 .hero-video .btn {
   padding: .75rem 1.6rem;
   font-size: 1rem;
@@ -1348,7 +1398,8 @@ h6 {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 1rem;
-    box-shadow: 0 8px 16px rgba(17, 24, 39, .05);   /* sombra bem discreta */
+  box-shadow: 0 8px 16px rgba(17, 24, 39, .05);
+  /* sombra bem discreta */
 }
 
 /* Rótulos dos campos */
@@ -1446,8 +1497,10 @@ h6 {
    evitando que a página ganhe barra de rolagem horizontal */
 .rodape-contato a,
 .rodape-contato span {
-  min-width: 0;                    /* deixa o item flex encolher abaixo do tamanho do texto */
-  overflow-wrap: anywhere;         /* quebra a linha em qualquer ponto se for preciso */
+  min-width: 0;
+  /* deixa o item flex encolher abaixo do tamanho do texto */
+  overflow-wrap: anywhere;
+  /* quebra a linha em qualquer ponto se for preciso */
 }
 
 /* Redes sociais: ícones em círculos com borda branca (invertem ao passar o mouse) */
