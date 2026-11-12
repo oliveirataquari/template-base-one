@@ -86,6 +86,26 @@
 <body data-bs-spy="scroll" data-bs-target="#navmenu" data-bs-root-margin="-80px 0px -60% 0px"
   data-bs-smooth-scroll="true" tabindex="0">
 
+  <!-- =====================================================================
+       PRELOADER (ícone de carregamento)
+       Cobre a página até tudo carregar; o main.js o esconde depois.
+       Para remover do projeto: apague este bloco, o bloco "21" do CSS e o
+       bloco PRELOADER do main.js.
+       ===================================================================== -->
+  <div id="preloader" role="status" aria-label="Carregando">
+    <div class="preloader-anel"></div>
+    <span class="visually-hidden">Carregando…</span>
+  </div>
+  <!-- Sem JavaScript o preloader nunca sumiria: esta linha o desativa nesse caso -->
+  <noscript>
+    <style>
+      #preloader {
+        display: none;
+      }
+    </style>
+  </noscript>
+
+
   <!-- Link de acessibilidade: permite pular o menu usando o teclado -->
   <a class="visually-hidden-focusable skip-link" href="#main">Ir para o conteúdo</a>
 
@@ -128,7 +148,8 @@
 
       <!-- 3) AÇÕES (direita): botão de contato + hambúrguer (este só aparece no mobile) -->
       <div class="header-actions">
-        <a class="btn btn-cta" href="#contato">Fale conosco</a>
+        <a class="btn btn-cta" href="#contato"><i class="fa-brands fa-whatsapp me-1" aria-hidden="true"></i> Fale
+          conosco</a>
 
         <button class="header-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"
           aria-controls="navmenu" aria-expanded="false" aria-label="Abrir ou fechar o menu">
@@ -262,6 +283,96 @@
         </div>
       </div>
     </section>
+
+
+
+
+
+    <!-- =====================================================================
+         NÚMEROS | layout "numeros-painel" (contadores + gráfico rosca animado)
+         Os números sobem e o gráfico se desenha quando a seção aparece na tela
+         (controlado pelo main.js). O valor final fica escrito no HTML.
+         CONTADOR: data-contador = número final | data-prefixo / data-sufixo = texto antes/depois
+         GRÁFICO: cada <circle> tem --p (percentual) e --o (onde começa = soma dos anteriores).
+                  Os percentuais devem somar 100.
+         ===================================================================== -->
+    <section id="numeros" class="secao numeros-painel">
+      <div class="container">
+
+        <!-- Cabeçalho da seção (padrão reutilizável) -->
+        <div class="secao-cabecalho">
+          <span class="secao-rotulo">Em números</span>
+          <h2 class="secao-titulo">Nossa trajetória em números</h2>
+          <p class="secao-subtitulo">Frase curta que complementa a apresentação da empresa.</p>
+        </div>
+
+        <div class="row g-4">
+
+          <!-- Esquerda: 4 contadores (para adicionar mais, copie um bloco <div class="col-6">) -->
+          <div class="col-lg-7">
+            <div class="row g-4 h-100">
+              <div class="col-6">
+                <div class="numeros-card">
+                  <span class="numeros-valor" data-contador="15" data-sufixo="+">15+</span>
+                  <span class="numeros-rotulo">Anos de experiência</span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="numeros-card">
+                  <span class="numeros-valor" data-contador="40" data-sufixo="+">40+</span>
+                  <span class="numeros-rotulo">Profissionais</span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="numeros-card">
+                  <span class="numeros-valor" data-contador="98" data-sufixo="%">98%</span>
+                  <span class="numeros-rotulo">Clientes satisfeitos</span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="numeros-card">
+                  <span class="numeros-valor" data-contador="120" data-sufixo="+">120+</span>
+                  <span class="numeros-rotulo">Projetos realizados</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direita: gráfico rosca com legenda -->
+          <div class="col-lg-5">
+            <div class="numeros-card-donut numeros-grafico">
+              <h3 class="numeros-grafico-titulo">Distribuição dos atendimentos</h3>
+
+              <div class="donut" role="img" aria-label="Gráfico: 50% categoria A, 30% categoria B e 20% categoria C">
+                <svg viewBox="0 0 36 36" aria-hidden="true">
+                  <circle class="donut-fundo" cx="18" cy="18" r="15.9155"></circle>
+                  <circle class="donut-seg donut-seg-1" cx="18" cy="18" r="15.9155" style="--p:50; --o:0;  --i:0">
+                  </circle>
+                  <circle class="donut-seg donut-seg-2" cx="18" cy="18" r="15.9155" style="--p:30; --o:50; --i:1">
+                  </circle>
+                  <circle class="donut-seg donut-seg-3" cx="18" cy="18" r="15.9155" style="--p:20; --o:80; --i:2">
+                  </circle>
+                </svg>
+                <!-- Número no centro da rosca -->
+                <div class="donut-centro">
+                  <span class="numeros-valor" data-contador="2400" data-sufixo="+">2.400+</span>
+                  <span class="numeros-rotulo">atendimentos por ano</span>
+                </div>
+              </div>
+
+              <!-- Legenda (as cores vêm do CSS: ponto-1, ponto-2, ponto-3) -->
+              <ul class="donut-legenda">
+                <li><span class="donut-ponto donut-ponto-1"></span>Categoria A <strong>50%</strong></li>
+                <li><span class="donut-ponto donut-ponto-2"></span>Categoria B <strong>30%</strong></li>
+                <li><span class="donut-ponto donut-ponto-3"></span>Categoria C <strong>20%</strong></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
 
 
 
@@ -845,7 +956,7 @@
           </div>
 
           <button type="submit" class="btn btn-cta">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Enviar pelo WhatsApp
+            <i class="fa-brands fa-whatsapp me-1" aria-hidden="true"></i> Enviar pelo WhatsApp
           </button>
 
         </form>

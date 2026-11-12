@@ -14,6 +14,47 @@
 (function () {
   "use strict";
 
+
+  /* ---------------------------------------------------------------------
+     PRELOADER: esconde o ícone de carregamento quando tudo estiver pronto
+        - Espera a página inteira carregar (imagens, fontes, estilos)
+        - Se existir hero-video, espera também o primeiro quadro do vídeo
+        - LIMITE: depois deste tempo (ms) o ícone some de qualquer jeito,
+          para nunca deixar o visitante preso (ex.: vídeo bloqueado/lento)
+     --------------------------------------------------------------------- */
+  const preloader = document.getElementById("preloader");
+
+  if (preloader) {
+    const LIMITE = 8000;
+    const video = document.querySelector(".hero-video-media");
+    const esperas = [];
+
+    // 1) A página inteira
+    esperas.push(new Promise(function (resolve) {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", resolve, { once: true });
+    }));
+
+    // 2) O vídeo do hero (só se existir e ainda não tiver o primeiro quadro)
+    if (video && video.readyState < 2) {
+      esperas.push(new Promise(function (resolve) {
+        video.addEventListener("loadeddata", resolve, { once: true });
+        video.addEventListener("error", resolve, { once: true });
+      }));
+    }
+
+    // Termina quando tudo carregar OU quando o tempo-limite acabar (o que vier primeiro)
+    const limite = new Promise(function (resolve) { setTimeout(resolve, LIMITE); });
+
+    Promise.race([Promise.all(esperas), limite]).then(function () {
+      preloader.classList.add("carregado");                      // fade-out (CSS)
+      preloader.addEventListener("transitionend", function () {
+        preloader.remove();                                      // tira do HTML depois do fade
+      }, { once: true });
+    });
+  }
+
+
   /* ---------------------------------------------------------------------
      1. HEADER: adiciona a classe .scrolled quando a página sai do topo
      --------------------------------------------------------------------- */
@@ -306,6 +347,68 @@
       contatoForm.classList.remove("was-validated");
     });
   }
+
+
+
+
+  /* ---------------------------------------------------------------------
+     NÚMEROS (contadores + gráfico rosca)
+        - Quando a seção aparece na tela, os números sobem até o valor final
+          (data-contador) e o gráfico se desenha. Acontece uma vez só.
+        - "duracao" = tempo (ms) que o número leva para chegar ao final
+        - Sem animação para quem desativou movimento no sistema
+     --------------------------------------------------------------------- */
+  const painelNumeros = document.querySelector(".numeros-painel");
+
+  if (painelNumeros) {
+    const contadores = painelNumeros.querySelectorAll("[data-contador]");
+    const grafico = painelNumeros.querySelector(".donut");
+    const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duracao = 1800;
+
+    // Monta o texto: prefixo + número com separador de milhar (2.400) + sufixo
+    function formatarNumero(el, valor) {
+      return (el.dataset.prefixo || "") + valor.toLocaleString("pt-BR") + (el.dataset.sufixo || "");
+    }
+
+    // Faz um número subir de 0 até o valor final
+    function animarContador(el) {
+      const alvo = parseFloat(el.dataset.contador);
+      if (semMovimento) { el.textContent = formatarNumero(el, alvo); return; }
+
+      const inicio = performance.now();
+      function passo(agora) {
+        const progresso = Math.min((agora - inicio) / duracao, 1);
+        const suave = 1 - Math.pow(1 - progresso, 3);        // começa rápido e desacelera no final
+        el.textContent = formatarNumero(el, Math.round(alvo * suave));
+        if (progresso < 1) requestAnimationFrame(passo);
+      }
+      requestAnimationFrame(passo);
+    }
+
+    function iniciarNumeros() {
+      contadores.forEach(animarContador);
+      if (grafico) grafico.classList.add("visivel");         // o CSS desenha o gráfico
+    }
+
+    if (!semMovimento) {
+      // Antes de aparecer, os números começam em zero
+      contadores.forEach(function (el) { el.textContent = formatarNumero(el, 0); });
+    }
+
+    if ("IntersectionObserver" in window) {
+      const observador = new IntersectionObserver(function (entradas, obs) {
+        if (entradas[0].isIntersecting) {
+          iniciarNumeros();
+          obs.disconnect();                                   // dispara uma vez só
+        }
+      }, { threshold: 0.3 });                                 // 30% da seção visível
+      observador.observe(painelNumeros);
+    } else {
+      iniciarNumeros();                                       // navegador antigo: mostra direto
+    }
+  }
+
 
 
 

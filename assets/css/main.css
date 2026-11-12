@@ -1539,6 +1539,188 @@ h6 {
 
 
 
+/* =========================================================================
+   20. NÚMEROS | layout "numeros-painel" (contadores + gráfico rosca)
+   ========================================================================= */
+
+/* ----- Card (mesmo estilo dos outros cards do tema) ----- */
+.numeros-card {
+  height: 100%;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+}
+
+.numeros-card-donut {
+  height: 100%;
+  padding: 2rem 1.5rem;
+  padding-top:0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--color-bg);
+}
+/* Altura menor no celular */
+@media (max-width: 767.98px) {
+  .numeros-card-donut {
+    padding: 2rem 1.5rem;
+  }
+}
+
+
+/* Número grande */
+.numeros-valor {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.1;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;   /* algarismos de largura igual: o número não "treme" ao subir */
+}
+
+/* Texto abaixo do número */
+.numeros-rotulo {
+  display: block;
+  margin-top: .35rem;
+  font-size: .95rem;
+  color: var(--color-muted);
+}
+
+/* ----- Gráfico rosca ----- */
+.numeros-grafico-titulo {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+
+/* Área quadrada do gráfico (o SVG e o texto central ficam empilhados aqui) */
+.donut {
+  position: relative;
+  width: min(100%, 14rem);
+  aspect-ratio: 1;
+  margin: 0 auto 1.5rem;
+}
+.donut svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);             /* começa no topo, e não à direita */
+}
+.donut circle {
+  fill: none;
+  stroke-width: 4;                       /* espessura do anel */
+}
+
+/* Anel de fundo (cinza claro) */
+.donut-fundo { stroke: var(--color-border); }
+
+/* Segmentos: começam "vazios" e se desenham quando o .donut recebe a classe .visivel (main.js) */
+.donut-seg {
+  stroke-dasharray: 0 100px;
+  stroke-dashoffset: calc(var(--o) * -1px);
+  transition: stroke-dasharray 1.2s ease-out;
+  transition-delay: calc(var(--i) * .3s);   /* um segmento depois do outro */
+}
+.donut.visivel .donut-seg {
+  stroke-dasharray: calc(var(--p) * 1px) 100px;
+}
+
+/* Cores dos segmentos (tons do azul do tema; troque aqui se quiser) */
+.donut-seg-1 { stroke: var(--color-primary); }
+.donut-seg-2 { stroke: rgba(var(--bs-primary-rgb), .6); }
+.donut-seg-3 { stroke: rgba(var(--bs-primary-rgb), .3); }
+
+/* Texto no centro da rosca */
+.donut-centro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.donut-centro .numeros-valor { font-size: 1.8rem; }
+.donut-centro .numeros-rotulo { margin-top: .1rem; font-size: .8rem; }
+
+/* ----- Legenda ----- */
+.donut-legenda {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .5rem;
+  width: 100%;
+  max-width: 14rem;
+  font-size: .95rem;
+}
+.donut-legenda li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+.donut-legenda strong { margin-left: auto; }   /* percentual alinhado à direita */
+.donut-ponto {
+  width: .75rem;
+  height: .75rem;
+  border-radius: 50%;
+}
+.donut-ponto-1 { background: var(--color-primary); }
+.donut-ponto-2 { background: rgba(var(--bs-primary-rgb), .6); }
+.donut-ponto-3 { background: rgba(var(--bs-primary-rgb), .3); }
+
+/* Respeita quem desativou animações no sistema */
+@media (prefers-reduced-motion: reduce) {
+  .donut-seg { transition: none; }
+}
+
+
+/* =========================================================================
+   21. PRELOADER (ícone de carregamento)
+   Fundo branco + anel na cor principal do tema.
+   ========================================================================= */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;                   /* acima de tudo, inclusive do header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  transition: opacity .4s, visibility .4s;
+}
+
+/* Classe aplicada pelo main.js quando tudo carregou: some suavemente */
+#preloader.carregado {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Anel girando (a parte azul é a "borda de cima", o resto é um azul bem claro) */
+.preloader-anel {
+  width: 3rem;
+  height: 3rem;
+  border: .3rem solid rgba(var(--bs-primary-rgb), .2);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: preloader-girar .8s linear infinite;
+}
+
+@keyframes preloader-girar {
+  to { transform: rotate(360deg); }
+}
+
+
+
+
 
 
 
